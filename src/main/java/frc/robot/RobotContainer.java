@@ -1,21 +1,16 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import edu.wpi.first.math.controller.ElevatorFeedforward;
-import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.DriveJoystickCmd;
 import frc.robot.commands.ElevatorButtonCmd;
 import frc.robot.subsystems.DriveMotorSubsystem;
 import frc.robot.subsystems.ElevatorMotorSubsystem;
+
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj.Joystick;
 
 public class RobotContainer {
 
