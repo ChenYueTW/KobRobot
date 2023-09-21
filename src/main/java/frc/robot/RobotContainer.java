@@ -27,7 +27,6 @@ public class RobotContainer {
     () -> -driverJoystick.getRawAxis(GamepadJoystick.RDriverXAxis)));
 
     configureBindings();
-
   }
 
   private void configureBindings() {

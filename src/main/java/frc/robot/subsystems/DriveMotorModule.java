@@ -21,12 +21,11 @@ public class DriveMotorModule {
     }
 
     public void setDesiredState(Double speed) {
-        // 將 speed 乘以速度最大值
+
         this.speed_input = speed * Constants.DriveConstants.CIMkSpeed;
         Motor.set(ControlMode.PercentOutput, this.speed_input);
 
-        // 在 SmartDashboard 顯示當前轉速
-        SmartDashboard.putNumber("Speed: ", this.speed_input);
+        SmartDashboard.putNumber("CIM-Speed: ", this.speed_input);
         
     }
 

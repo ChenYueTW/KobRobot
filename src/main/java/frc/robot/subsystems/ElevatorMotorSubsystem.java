@@ -21,18 +21,16 @@ public class ElevatorMotorSubsystem extends SubsystemBase{
 
         ElevatorMotor.setSmartCurrentLimit(30);
 
-        // kBrake 會在馬達停止後鎖住馬達
-        // kCoast 會在馬達停止後讓馬達保持慣性
+        // kBrake & kCoast
         ElevatorMotor.setIdleMode(IdleMode.kBrake); 
         ElevatorMotor.setInverted(false);
     }
 
     public void setDesiredState(Double speed) {
-        // 將 speed 乘以速度最大值
+
         this.Elevator_speed = speed * Constants.DriveConstants.ElevatorSpeed; 
         ElevatorMotor.set(this.Elevator_speed);
 
-        // 在 SmartDashboard 顯示當前轉速
         SmartDashboard.putNumber("ELevator-Speed: ", Elevator_speed);
         
     }
