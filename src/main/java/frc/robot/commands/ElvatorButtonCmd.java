@@ -1,24 +1,24 @@
 package frc.robot.commands;
 
-import frc.robot.subsystems.ElevatorMotorSubsystem;
+import frc.robot.subsystems.ElvatorMotorSubsystem;
 import frc.robot.Constants;
 
 import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ElevatorButtonCmd extends CommandBase {
+public class ElvatorButtonCmd extends CommandBase {
 
-    private final ElevatorMotorSubsystem ElevatorSubsystem;
+    private final ElvatorMotorSubsystem ElvatorSubsystem;
     private final double Speed;
 
 
-    public ElevatorButtonCmd(ElevatorMotorSubsystem subsystem, double Speed) {
+    public ElvatorButtonCmd(ElvatorMotorSubsystem subsystem, double Speed) {
 
-        ElevatorSubsystem = subsystem;
+        ElvatorSubsystem = subsystem;
         this.Speed = Speed;
         
-        addRequirements(ElevatorSubsystem);
+        addRequirements(ElvatorSubsystem);
     }
 
     @Override
@@ -26,12 +26,12 @@ public class ElevatorButtonCmd extends CommandBase {
 
     @Override
     public void execute() {
-        ElevatorSubsystem.setDesiredState(Speed);
+        ElvatorSubsystem.setDesiredState(Speed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        ElevatorSubsystem.stop();
+        ElvatorSubsystem.stop();
     }
 
     @Override

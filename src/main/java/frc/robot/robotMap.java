@@ -10,7 +10,9 @@ public class robotMap {
         }
 
         public class CAN_Port {
-            public static final int Elevator1MotorPort = 3;
+            public static final int Elvator1MotorPort = 3;
+            public static final int Elvator2MotorPort = 4;
+            public static final int IntakeMotorPort = 5;
         }
     }
 }
