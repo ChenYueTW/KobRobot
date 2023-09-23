@@ -43,8 +43,8 @@ public class RobotContainer {
     driverJoystick.BButton.whileTrue(new IntakeDriveCmd(IntakeSubsystem, -0.3));
 
     // Arm
-    driverJoystick.LeftButton.whileTrue(new ArmDriveCmd(ArmSubsystem, 0));
-    driverJoystick.RightButton.whileTrue(new ArmDriveCmd(ArmSubsystem, 0));
+    driverJoystick.LeftButton.whileTrue(new ArmDriveCmd(ArmSubsystem, 0.3));
+    driverJoystick.RightButton.whileTrue(new ArmDriveCmd(ArmSubsystem, -0.3));
   }
 
   public Command getAutonomousCommand() {
