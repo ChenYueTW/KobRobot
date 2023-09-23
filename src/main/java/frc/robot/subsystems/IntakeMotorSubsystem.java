@@ -19,7 +19,7 @@ public class IntakeMotorSubsystem extends SubsystemBase{
 
     public IntakeMotorSubsystem() {
 
-        IntakeMotor = new CANSparkMax(robotMap.DriverPort.CAN_Port.Elvator1MotorPort, MotorType.kBrushless);
+        IntakeMotor = new CANSparkMax(robotMap.DriverPort.Intake_Port.IntakeMotorPort, MotorType.kBrushless);
 
         IntakeMotor.setSmartCurrentLimit(30);
 

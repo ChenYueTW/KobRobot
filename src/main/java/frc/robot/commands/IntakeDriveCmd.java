@@ -15,10 +15,10 @@ public class IntakeDriveCmd extends CommandBase {
     private final double Intake_Speed;
 
 
-    public IntakeDriveCmd(IntakeMotorSubsystem subsystem, int i) {
+    public IntakeDriveCmd(IntakeMotorSubsystem subsystem, double Intake_Speed) {
 
         IntakeSubsystem = subsystem;
-        this.Intake_Speed = i;
+        this.Intake_Speed = Intake_Speed;
         
         addRequirements(IntakeSubsystem);
     }

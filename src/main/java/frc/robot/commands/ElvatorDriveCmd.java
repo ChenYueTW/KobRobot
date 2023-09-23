@@ -7,13 +7,13 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ElvatorButtonCmd extends CommandBase {
+public class ElvatorDriveCmd extends CommandBase {
 
     private final ElvatorMotorSubsystem ElvatorSubsystem;
     private final double Speed;
 
 
-    public ElvatorButtonCmd(ElvatorMotorSubsystem subsystem, double Speed) {
+    public ElvatorDriveCmd(ElvatorMotorSubsystem subsystem, double Speed) {
 
         ElvatorSubsystem = subsystem;
         this.Speed = Speed;

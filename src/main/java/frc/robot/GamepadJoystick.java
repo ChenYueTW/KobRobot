@@ -22,4 +22,6 @@ public class GamepadJoystick extends Joystick{
     public Trigger AButton = new JoystickButton(this, 1);
     public Trigger XButton = new JoystickButton(this, 3);
     public Trigger BButton = new JoystickButton(this, 2);
+    public Trigger LeftButton = new JoystickButton(this, 4);
+    public Trigger RightButton = new JoystickButton(this, 5);
 }

@@ -20,8 +20,8 @@ public class ElvatorMotorSubsystem extends SubsystemBase{
 
     public ElvatorMotorSubsystem() {
 
-        ElvatorMotor1 = new CANSparkMax(robotMap.DriverPort.CAN_Port.Elvator1MotorPort, MotorType.kBrushless);
-        ElvatorMotor2 = new CANSparkMax(robotMap.DriverPort.CAN_Port.Elvator2MotorPort, MotorType.kBrushless);
+        ElvatorMotor1 = new CANSparkMax(robotMap.DriverPort.Elvator_Port.Elvator1MotorPort, MotorType.kBrushless);
+        ElvatorMotor2 = new CANSparkMax(robotMap.DriverPort.Elvator_Port.Elvator2MotorPort, MotorType.kBrushless);
 
         ElvatorMotor1.setSmartCurrentLimit(30);
         ElvatorMotor2.setSmartCurrentLimit(30);
@@ -38,8 +38,9 @@ public class ElvatorMotorSubsystem extends SubsystemBase{
 
         this.Elvator_speed = speed * Constants.DriveConstants.ElvatorSpeed; 
         ElvatorMotor1.set(this.Elvator_speed);
+        ElvatorMotor2.set(this.Elvator_speed);
 
-        SmartDashboard.putNumber("ELevator-Speed: ", Elvator_speed);
+        SmartDashboard.putNumber("Elvator-Speed: ", Elvator_speed);
         
     }
 
