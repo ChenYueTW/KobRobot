@@ -18,10 +18,10 @@ public class GamepadJoystick extends Joystick{
     public static final int RDriverXAxis = 4;
     public static final int RDriverYAxis = 5;
 
-    public Trigger YButton = new JoystickButton(this, 0);
+    public Trigger YButton = new JoystickButton(this, 4);
     public Trigger AButton = new JoystickButton(this, 1);
     public Trigger XButton = new JoystickButton(this, 3);
     public Trigger BButton = new JoystickButton(this, 2);
-    public Trigger LeftButton = new JoystickButton(this, 4);
-    public Trigger RightButton = new JoystickButton(this, 5);
+    public Trigger LeftButton = new JoystickButton(this, 5);
+    public Trigger RightButton = new JoystickButton(this, 6);
 }

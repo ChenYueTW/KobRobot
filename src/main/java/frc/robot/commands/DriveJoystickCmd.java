@@ -31,8 +31,8 @@ public class DriveJoystickCmd extends CommandBase {
         double Speed = SpeedFunction.get();
         double Turn = TurnFuncion.get();
 
-        double LeftkMotorSpeed = Speed + Turn;
-        double RightkMotorSpeed = Speed - Turn;
+        double LeftkMotorSpeed = Speed - Turn;
+        double RightkMotorSpeed = Speed + Turn;
         MotorSubsystem.kDrivermove(LeftkMotorSpeed, RightkMotorSpeed);
     }
 
