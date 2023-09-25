@@ -4,8 +4,7 @@ import frc.robot.Constants;
 import frc.robot.robotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX
-;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveMotorModule {
@@ -20,13 +19,12 @@ public class DriveMotorModule {
         
     }
 
-    public void setDesiredState(Double speed) {
+    public void setDesiredState(Double Drive_Speed) {
 
-        this.speed_input = speed * Constants.DriveConstants.CIMkSpeed;
+        this.speed_input = Drive_Speed * Constants.DriveConstants.CIMkSpeed;
         Motor.set(ControlMode.PercentOutput, this.speed_input);
 
-        SmartDashboard.putNumber("CIM-Speed: ", this.speed_input);
-        
+        SmartDashboard.putNumber("CIM-Speed: ", this.speed_input);       
     }
 
     public void stop() {

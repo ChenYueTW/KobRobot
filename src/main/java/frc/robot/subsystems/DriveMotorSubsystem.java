@@ -5,7 +5,6 @@ import frc.robot.robotMap;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
 public class DriveMotorSubsystem extends SubsystemBase { 
 
     private static DriveMotorModule kL1_Motor;

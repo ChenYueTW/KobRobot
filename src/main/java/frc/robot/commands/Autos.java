@@ -4,13 +4,17 @@
 
 package frc.robot.commands;
 
+import java.util.function.Supplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.subsystems.DriveMotorModule;
 import frc.robot.subsystems.DriveMotorSubsystem;
 
-public final class Autos {
+public class Autos extends DriveMotorModule{
 
-  private Autos() {
-    throw new UnsupportedOperationException("This is a utility class!");
+  public Autos(int Motor_Port, boolean reverse) {
+    super(Motor_Port, reverse);
   }
+
 }
