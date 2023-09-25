@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class ElvatorDriveCmd extends CommandBase {
 
     private final ElvatorMotorSubsystem ElvatorSubsystem;
-    private final double Speed;
+    private final double Elvator_Speed;
 
 
-    public ElvatorDriveCmd(ElvatorMotorSubsystem subsystem, double Speed) {
+    public ElvatorDriveCmd(ElvatorMotorSubsystem subsystem, double Elvator_Speed) {
 
         ElvatorSubsystem = subsystem;
-        this.Speed = Speed;
+        this.Elvator_Speed = Elvator_Speed;
         
         addRequirements(ElvatorSubsystem);
     }
@@ -26,7 +26,7 @@ public class ElvatorDriveCmd extends CommandBase {
 
     @Override
     public void execute() {
-        ElvatorSubsystem.setDesiredState(Speed);
+        ElvatorSubsystem.setDesiredState(Elvator_Speed);
     }
 
     @Override

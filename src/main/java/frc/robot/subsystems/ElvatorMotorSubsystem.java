@@ -34,9 +34,9 @@ public class ElvatorMotorSubsystem extends SubsystemBase{
         ElvatorMotor2.setInverted(false);
     }
 
-    public void setDesiredState(Double speed) {
+    public void setDesiredState(Double Elvator_Speed) {
 
-        this.Elvator_speed = speed * Constants.DriveConstants.ElvatorSpeed; 
+        this.Elvator_speed = Elvator_Speed * Constants.DriveConstants.ElvatorSpeed; 
         ElvatorMotor1.set(this.Elvator_speed);
         ElvatorMotor2.set(this.Elvator_speed);
 
