@@ -11,10 +11,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.DriveMotorModule;
 import frc.robot.subsystems.DriveMotorSubsystem;
 
-public class Autos extends DriveMotorModule{
+public class Autos extends CommandBase{
 
-  public Autos(int Motor_Port, boolean reverse) {
-    super(Motor_Port, reverse);
-  }
 
 }

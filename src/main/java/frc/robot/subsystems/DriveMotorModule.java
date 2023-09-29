@@ -11,6 +11,7 @@ public class DriveMotorModule {
 
     private VictorSPX Motor;
     private double speed_input;
+    public static double Auto_Speed;
 
     public DriveMotorModule(int Motor_Port, boolean reverse) {
         
@@ -21,7 +22,7 @@ public class DriveMotorModule {
 
     public void setDesiredState(Double Drive_Speed) {
 
-        this.speed_input = Drive_Speed * Constants.DriveConstants.CIMkSpeed;
+        this.speed_input = Drive_Speed * Constants.DriveConstants.CIMkSpeed + Auto_Speed;
         Motor.set(ControlMode.PercentOutput, this.speed_input);
 
         SmartDashboard.putNumber("CIM-Speed: ", this.speed_input);       

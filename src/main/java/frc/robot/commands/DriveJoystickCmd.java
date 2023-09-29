@@ -13,7 +13,6 @@ public class DriveJoystickCmd extends CommandBase {
     private final DriveMotorSubsystem MotorSubsystem;
     private final Supplier<Double> SpeedFunction, TurnFuncion;
 
-
     public DriveJoystickCmd(DriveMotorSubsystem subsystem, Supplier<Double> SpeedFunction, Supplier<Double> TurnFuncion) {
 
         MotorSubsystem = subsystem;
@@ -29,7 +28,7 @@ public class DriveJoystickCmd extends CommandBase {
     @Override
     public void execute() {
         double Speed = SpeedFunction.get();
-        double Turn = TurnFuncion.get();
+        double Turn = TurnFuncion.get() * Constants.DriveConstants.TurnSpeed;
 
         double LeftkMotorSpeed = Speed - Turn;
         double RightkMotorSpeed = Speed + Turn;
