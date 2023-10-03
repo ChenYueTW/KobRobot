@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import frc.robot.subsystems.DriveMotorModule;
 import frc.robot.robotMap;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;

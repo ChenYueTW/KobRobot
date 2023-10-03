@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import frc.robot.robotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -25,7 +24,8 @@ public class DriveMotorModule {
         this.speed_input = Drive_Speed * Constants.DriveConstants.CIMkSpeed + Auto_Speed;
         Motor.set(ControlMode.PercentOutput, this.speed_input);
 
-        SmartDashboard.putNumber("CIM-Speed: ", this.speed_input);       
+        SmartDashboard.putNumber("CIM-Speed: ", this.speed_input);
+        SmartDashboard.putNumber("Auto-Speed: ", Auto_Speed);     
     }
 
     public void stop() {

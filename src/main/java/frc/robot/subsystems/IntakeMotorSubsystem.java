@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 import frc.robot.robotMap;
 
-import com.ctre.phoenix.motorcontrol.MotorCommutation;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax.IdleMode;

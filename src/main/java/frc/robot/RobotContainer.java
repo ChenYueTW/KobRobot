@@ -9,16 +9,15 @@ import frc.robot.subsystems.ArmMotorSubsystem;
 import frc.robot.subsystems.DriveMotorSubsystem;
 import frc.robot.subsystems.ElvatorMotorSubsystem;
 import frc.robot.subsystems.IntakeMotorSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import javax.naming.directory.DirContext;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.Command;
 
 public class RobotContainer {
-
   private final DriveMotorSubsystem DriverSubsystem = new DriveMotorSubsystem();
   private final ElvatorMotorSubsystem ElvatorSubsystem = new ElvatorMotorSubsystem(); 
   private final ArmMotorSubsystem ArmSubsystem = new ArmMotorSubsystem();
@@ -47,6 +46,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return null;
+    return new Autos(DriverSubsystem);
   }
 }

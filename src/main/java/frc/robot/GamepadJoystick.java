@@ -9,7 +9,7 @@ public class GamepadJoystick extends Joystick{
         super(port);
     }
     
-    //COM ID
+    // COM ID
     public static final int kDriverControllerPort = 0;
     
     // Axis ID
