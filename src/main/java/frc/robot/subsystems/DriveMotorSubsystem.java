@@ -1,15 +1,14 @@
 package frc.robot.subsystems;
 
 import frc.robot.robotMap;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveMotorSubsystem extends SubsystemBase { 
-
-    private static DriveMotorModule kL1_Motor;
-    private static DriveMotorModule kL2_Motor;
-    private static DriveMotorModule kR1_Motor;
-    private static DriveMotorModule kR2_Motor;
+    private final DriveMotorModule kL1_Motor;
+    private final DriveMotorModule kL2_Motor;
+    private final DriveMotorModule kR1_Motor;
+    private final DriveMotorModule kR2_Motor;
 
     public DriveMotorSubsystem() {
         kL1_Motor = new DriveMotorModule(robotMap.DriverPort.PWM_Port.kL1MotorPort, false);

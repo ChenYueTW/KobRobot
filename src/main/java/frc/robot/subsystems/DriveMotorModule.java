@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -16,12 +17,12 @@ public class DriveMotorModule {
         
         Motor = new VictorSPX(Motor_Port);
         Motor.setInverted(reverse);
-        
+        Motor.setNeutralMode(NeutralMode.Brake);
     }
 
     public void setDesiredState(Double Drive_Speed) {
 
-        this.speed_input = Drive_Speed * Constants.DriveConstants.CIMkSpeed + Auto_Speed;
+        this.speed_input = Drive_Speed * Constants.DriveConstants.CIMkSpeed;
         Motor.set(ControlMode.PercentOutput, this.speed_input);
 
         SmartDashboard.putNumber("CIM-Speed: ", this.speed_input);
