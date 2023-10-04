@@ -7,14 +7,12 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-
 public class DriveJoystickCmd extends CommandBase {
 
     private final DriveMotorSubsystem MotorSubsystem;
     private final Supplier<Double> SpeedFunction, TurnFuncion;
 
     public DriveJoystickCmd(DriveMotorSubsystem subsystem, Supplier<Double> SpeedFunction, Supplier<Double> TurnFuncion) {
-
         MotorSubsystem = subsystem;
         this.SpeedFunction = SpeedFunction;
         this.TurnFuncion = TurnFuncion;

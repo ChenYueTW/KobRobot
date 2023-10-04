@@ -14,33 +14,31 @@ public class ElvatorMotorSubsystem extends SubsystemBase{
 
     private CANSparkMax ElvatorMotor1;
     private CANSparkMax ElvatorMotor2;
-
+    
     private double Elvator_speed;
 
     public ElvatorMotorSubsystem() {
-
         ElvatorMotor1 = new CANSparkMax(robotMap.DriverPort.Elvator_Port.Elvator1MotorPort, MotorType.kBrushless);
         ElvatorMotor2 = new CANSparkMax(robotMap.DriverPort.Elvator_Port.Elvator2MotorPort, MotorType.kBrushless);
 
         ElvatorMotor1.setSmartCurrentLimit(30);
         ElvatorMotor2.setSmartCurrentLimit(30);
 
+        ElvatorMotor1.setInverted(false);
+        ElvatorMotor2.setInverted(false);
+
         // kBrake & kCoast
         ElvatorMotor1.setIdleMode(IdleMode.kBrake); 
-        ElvatorMotor1.setInverted(false);
-
         ElvatorMotor2.setIdleMode(IdleMode.kBrake);
-        ElvatorMotor2.setInverted(false);
     }
 
     public void setDesiredState(Double Elvator_Speed) {
+        this.Elvator_speed = Elvator_Speed * Constants.DriveConstants.ElvatorSpeed;
 
-        this.Elvator_speed = Elvator_Speed * Constants.DriveConstants.ElvatorSpeed; 
         ElvatorMotor1.set(this.Elvator_speed);
         ElvatorMotor2.set(this.Elvator_speed);
 
         SmartDashboard.putNumber("Elvator-Speed: ", Elvator_speed);
-        
     }
 
     public void stop() {

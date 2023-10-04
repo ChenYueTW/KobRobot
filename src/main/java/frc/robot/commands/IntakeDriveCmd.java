@@ -1,22 +1,15 @@
 package frc.robot.commands;
 
-import frc.robot.subsystems.ElvatorMotorSubsystem;
 import frc.robot.subsystems.IntakeMotorSubsystem;
-import frc.robot.Constants;
-
-import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class IntakeDriveCmd extends CommandBase {
 
     private final IntakeMotorSubsystem IntakeSubsystem;
     private final double Intake_Speed;
 
-
     public IntakeDriveCmd(IntakeMotorSubsystem subsystem, double Intake_Speed) {
-
         IntakeSubsystem = subsystem;
         this.Intake_Speed = Intake_Speed;
         

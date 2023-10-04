@@ -10,9 +10,6 @@ import frc.robot.subsystems.DriveMotorSubsystem;
 import frc.robot.subsystems.ElvatorMotorSubsystem;
 import frc.robot.subsystems.IntakeMotorSubsystem;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-
-import javax.naming.directory.DirContext;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -26,27 +23,26 @@ public class RobotContainer {
   private final ElvatorMotorSubsystem ElvatorSubsystem = new ElvatorMotorSubsystem(); 
   private final ArmMotorSubsystem ArmSubsystem = new ArmMotorSubsystem();
   private final IntakeMotorSubsystem IntakeSubsystem = new IntakeMotorSubsystem();
-  private final GamepadJoystick driverJoystick = new GamepadJoystick(GamepadJoystick.kDriverControllerPort);
+  private final GamepadJoystick DriverJoystick = new GamepadJoystick(GamepadJoystick.kDriverControllerPort);
 
   public RobotContainer() {
     DriverSubsystem.setDefaultCommand(new DriveJoystickCmd(DriverSubsystem, 
-    () -> -driverJoystick.getRawAxis(GamepadJoystick.LDriverYAxis),
-    () -> -driverJoystick.getRawAxis(GamepadJoystick.RDriverXAxis)));
+    () -> -DriverJoystick.getRawAxis(GamepadJoystick.LDriverYAxis),
+    () -> -DriverJoystick.getRawAxis(GamepadJoystick.RDriverXAxis)));
 
     configureBindings();
   }
 
   private void configureBindings() {
     // Elvator
-    driverJoystick.YButton.whileTrue(new ElvatorDriveCmd(ElvatorSubsystem, 0.3));
-    driverJoystick.AButton.whileTrue(new ElvatorDriveCmd(ElvatorSubsystem, -0.3));
+    DriverJoystick.YButton.whileTrue(new ElvatorDriveCmd(ElvatorSubsystem, 0.3));
+    DriverJoystick.AButton.whileTrue(new ElvatorDriveCmd(ElvatorSubsystem, -0.3));
     // Intake
-    driverJoystick.XButton.whileTrue(new IntakeDriveCmd(IntakeSubsystem, 0.3));
-    driverJoystick.BButton.whileTrue(new IntakeDriveCmd(IntakeSubsystem, -0.3));
-
+    DriverJoystick.XButton.whileTrue(new IntakeDriveCmd(IntakeSubsystem, 0.3));
+    DriverJoystick.BButton.whileTrue(new IntakeDriveCmd(IntakeSubsystem, -0.3));
     // Arm
-    driverJoystick.LeftButton.whileTrue(new ArmDriveCmd(ArmSubsystem, 0.3));
-    driverJoystick.RightButton.whileTrue(new ArmDriveCmd(ArmSubsystem, -0.3));
+    DriverJoystick.LeftButton.whileTrue(new ArmDriveCmd(ArmSubsystem, 0.3));
+    DriverJoystick.RightButton.whileTrue(new ArmDriveCmd(ArmSubsystem, -0.3));
   }
 
   public Command getAutonomousCommand() {

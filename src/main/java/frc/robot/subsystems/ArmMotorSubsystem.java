@@ -17,24 +17,21 @@ public class ArmMotorSubsystem extends SubsystemBase{
     private double Arm_speed;
 
     public ArmMotorSubsystem() {
-
         ArmMotor = new CANSparkMax(robotMap.DriverPort.Arm_Port.Arm1MotorPort, MotorType.kBrushless);
 
         ArmMotor.setSmartCurrentLimit(30);
+        
+        ArmMotor.setInverted(false);
 
         // kBrake & kCoast
         ArmMotor.setIdleMode(IdleMode.kBrake);
-
-        ArmMotor.setInverted(false);
     }
 
     public void setDesiredState(Double ArmSpeed) {
-
         this.Arm_speed = ArmSpeed * Constants.DriveConstants.ArmSpeed;
         ArmMotor.set(Arm_speed);
 
         SmartDashboard.putNumber("Arm-Speed: ", Arm_speed);
-        
     }
 
     public void stop() {
