@@ -23,6 +23,13 @@ public class DriveMotorSubsystem extends SubsystemBase {
         kR1_Motor.setDesiredState(RightkMotorSpeed);
         kR2_Motor.setDesiredState(RightkMotorSpeed);
     }
+    
+    public void kAutoDriverMove(Double AutoSpeed){
+        kL1_Motor.setAutoDesiredState(AutoSpeed);
+        kL2_Motor.setAutoDesiredState(AutoSpeed);
+        kR1_Motor.setAutoDesiredState(AutoSpeed);
+        kR2_Motor.setAutoDesiredState(AutoSpeed);
+    }
 
     public void stopModules() {
         kL1_Motor.stop();

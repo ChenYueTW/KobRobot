@@ -19,7 +19,7 @@ public class Autos extends CommandBase {
 
     @Override
     public void execute() {
-        AutoSubsystem.kDrivermove(0.6, 0.6);
+        AutoSubsystem.kAutoDriverMove(0.3);
     }
 
     @Override
