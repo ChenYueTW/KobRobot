@@ -8,38 +8,36 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveMotorModule {
+    private final VictorSPX motor;
+    private double driveSpeed;
+    private double autoDriveSpeed;
 
-    private VictorSPX Motor;
+    public DriveMotorModule(int motorPort, boolean reverse) {
+        motor = new VictorSPX(motorPort);
 
-    private double speed_input;
-    private double Auto_Speed;
-
-    public DriveMotorModule(int Motor_Port, boolean reverse) {
-        Motor = new VictorSPX(Motor_Port);
-
-        Motor.setInverted(reverse);
+        motor.setInverted(reverse);
 
         // Brake & Coast
-        Motor.setNeutralMode(NeutralMode.Brake);
+        motor.setNeutralMode(NeutralMode.Brake);
     }
 
-    public void setDesiredState(Double Drive_Speed) {
-        this.speed_input = Drive_Speed * Constants.DriveConstants.CIMkSpeed;
+    public void setDesiredState(double driveSpeed) {
+        this.driveSpeed = driveSpeed * Constants.DriveConstants.driveSpeed;
         
-        Motor.set(ControlMode.PercentOutput, this.speed_input);
+        motor.set(ControlMode.PercentOutput, this.driveSpeed);
 
-        SmartDashboard.putNumber("CIM-Speed: ", this.speed_input); 
+        SmartDashboard.putNumber("CIM-Speed: ", this.driveSpeed); 
     }
 
-    public void setAutoDesiredState(Double Auto_Speed){
-        this.Auto_Speed = Auto_Speed * Constants.DriveConstants.AutoSpeed;
+    public void setAutoDesiredState(double autoDriveSpeed){
+        this.autoDriveSpeed = autoDriveSpeed * Constants.DriveConstants.autoDirveSpeed;
 
-        Motor.set(ControlMode.PercentOutput, this.Auto_Speed);
+        motor.set(ControlMode.PercentOutput, this.autoDriveSpeed);
 
-        SmartDashboard.putNumber("Auto-Speed: ", this.Auto_Speed);
+        SmartDashboard.putNumber("Auto-Speed: ", this.autoDriveSpeed);
     }
 
     public void stop() {
-        Motor.set(ControlMode.PercentOutput, 0);
+        motor.set(ControlMode.PercentOutput, 0);
     }
 }

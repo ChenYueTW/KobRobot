@@ -1,19 +1,18 @@
 package frc.robot.commands;
 
-import frc.robot.subsystems.IntakeMotorSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class IntakeDriveCmd extends CommandBase {
+    private final IntakeSubsystem intakeSubsystem;
+    private final double intakeSpeed;
 
-    private final IntakeMotorSubsystem IntakeSubsystem;
-    private final double Intake_Speed;
-
-    public IntakeDriveCmd(IntakeMotorSubsystem subsystem, double Intake_Speed) {
-        IntakeSubsystem = subsystem;
-        this.Intake_Speed = Intake_Speed;
+    public IntakeDriveCmd(IntakeSubsystem subsystem, double intakeSpeed) {
+        this.intakeSubsystem = subsystem;
+        this.intakeSpeed = intakeSpeed;
         
-        addRequirements(IntakeSubsystem);
+        this.addRequirements(intakeSubsystem);
     }
 
     @Override
@@ -21,12 +20,12 @@ public class IntakeDriveCmd extends CommandBase {
 
     @Override
     public void execute() {
-        IntakeSubsystem.setDesiredState(Intake_Speed);
+        this.intakeSubsystem.setDesiredState(this.intakeSpeed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        IntakeSubsystem.stop();
+        this.intakeSubsystem.stop();
     }
 
     @Override

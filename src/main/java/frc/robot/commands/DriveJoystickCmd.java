@@ -8,16 +8,15 @@ import java.util.function.Supplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DriveJoystickCmd extends CommandBase {
+    private final DriveMotorSubsystem driveMotorSubsystem;
+    private final Supplier<Double> speedSupplier, turnSupplier;
 
-    private final DriveMotorSubsystem MotorSubsystem;
-    private final Supplier<Double> SpeedFunction, TurnFuncion;
-
-    public DriveJoystickCmd(DriveMotorSubsystem subsystem, Supplier<Double> SpeedFunction, Supplier<Double> TurnFuncion) {
-        MotorSubsystem = subsystem;
-        this.SpeedFunction = SpeedFunction;
-        this.TurnFuncion = TurnFuncion;
+    public DriveJoystickCmd(DriveMotorSubsystem subsystem, Supplier<Double> speedFunction, Supplier<Double> turnFunction) {
+        this.driveMotorSubsystem = subsystem;
+        this.speedSupplier = speedFunction;
+        this.turnSupplier = turnFunction;
         
-        addRequirements(MotorSubsystem);
+        this.addRequirements(driveMotorSubsystem);
     }
 
     @Override
@@ -25,17 +24,17 @@ public class DriveJoystickCmd extends CommandBase {
 
     @Override
     public void execute() {
-        double Speed = SpeedFunction.get();
-        double Turn = TurnFuncion.get() * Constants.DriveConstants.TurnSpeed;
+        double driveSpeed = speedSupplier.get();
+        double turnSpeed = turnSupplier.get() * Constants.DriveConstants.turnSpeed;
 
-        double LeftkMotorSpeed = Speed - Turn;
-        double RightkMotorSpeed = Speed + Turn;
-        MotorSubsystem.kDrivermove(LeftkMotorSpeed, RightkMotorSpeed);
+        double leftDriveSpeed = driveSpeed - turnSpeed;
+        double rightDriveSpeed = driveSpeed + turnSpeed;
+        this.driveMotorSubsystem.driverMove(leftDriveSpeed, rightDriveSpeed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        MotorSubsystem.stopModules();
+        this.driveMotorSubsystem.stopModules();
     }
 
     @Override

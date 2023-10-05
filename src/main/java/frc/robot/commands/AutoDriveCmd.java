@@ -4,14 +4,13 @@ import frc.robot.subsystems.DriveMotorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class Autos extends CommandBase {
-
-    private final DriveMotorSubsystem AutoSubsystem;
+public class AutoDriveCmd extends CommandBase {
+    private final DriveMotorSubsystem driveMotorSubsystem;
  
-    public Autos(DriveMotorSubsystem subsystem){
-        AutoSubsystem = subsystem;
+    public AutoDriveCmd(DriveMotorSubsystem subsystem){
+        this.driveMotorSubsystem = subsystem;
 
-        addRequirements(AutoSubsystem);
+        this.addRequirements(driveMotorSubsystem);
     }
 
     @Override
@@ -19,12 +18,12 @@ public class Autos extends CommandBase {
 
     @Override
     public void execute() {
-        AutoSubsystem.kAutoDriverMove(0.3);
+        this.driveMotorSubsystem.autoDriveMove(0.3);
     }
 
     @Override
     public void end(boolean interrupted) {
-        this.AutoSubsystem.stopModules();
+        this.driveMotorSubsystem.stopModules();
     }
 
     @Override

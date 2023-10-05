@@ -1,19 +1,18 @@
 package frc.robot.commands;
 
-import frc.robot.subsystems.ArmMotorSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ArmDriveCmd extends CommandBase {
+    private final ArmSubsystem armSubsystem;
+    private final double armSpeed;
 
-    private final ArmMotorSubsystem ArmSubsystem;
-    private final double ArmSpeed;
-
-    public ArmDriveCmd(ArmMotorSubsystem subsystem, double ArmSpeed) {
-        ArmSubsystem = subsystem;
-        this.ArmSpeed = ArmSpeed;
+    public ArmDriveCmd(ArmSubsystem subsystem, double armSpeed) {
+        this.armSubsystem = subsystem;
+        this.armSpeed = armSpeed;
         
-        addRequirements(ArmSubsystem);
+        this.addRequirements(this.armSubsystem);
     }
 
     @Override
@@ -21,12 +20,12 @@ public class ArmDriveCmd extends CommandBase {
 
     @Override
     public void execute() {
-        ArmSubsystem.setDesiredState(ArmSpeed);
+        this.armSubsystem.setDesiredState(this.armSpeed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        ArmSubsystem.stop();
+        this.armSubsystem.stop();
     }
 
     @Override

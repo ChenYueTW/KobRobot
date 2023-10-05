@@ -1,14 +1,14 @@
 package frc.robot;
 
 import frc.robot.commands.ArmDriveCmd;
-import frc.robot.commands.Autos;
+import frc.robot.commands.AutoDriveCmd;
 import frc.robot.commands.DriveJoystickCmd;
-import frc.robot.commands.ElvatorDriveCmd;
+import frc.robot.commands.ElevatorDriveCmd;
 import frc.robot.commands.IntakeDriveCmd;
-import frc.robot.subsystems.ArmMotorSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveMotorSubsystem;
-import frc.robot.subsystems.ElvatorMotorSubsystem;
-import frc.robot.subsystems.IntakeMotorSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -21,34 +21,33 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class RobotContainer {
-  private final DriveMotorSubsystem DriverSubsystem = new DriveMotorSubsystem();
-  private final ElvatorMotorSubsystem ElvatorSubsystem = new ElvatorMotorSubsystem(); 
-  private final ArmMotorSubsystem ArmSubsystem = new ArmMotorSubsystem();
-  private final IntakeMotorSubsystem IntakeSubsystem = new IntakeMotorSubsystem();
-  private final GamepadJoystick DriverJoystick = new GamepadJoystick(GamepadJoystick.kDriverControllerPort);
+  private final DriveMotorSubsystem driveMotorSubsystem = new DriveMotorSubsystem();
+  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(); 
+  private final ArmSubsystem armSubsystem = new ArmSubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final GamepadJoystick driverJoystick = new GamepadJoystick(GamepadJoystick.Controller_Port);
 
   public RobotContainer() {
-    DriverSubsystem.setDefaultCommand(new DriveJoystickCmd(DriverSubsystem, 
-    () -> -DriverJoystick.getRawAxis(GamepadJoystick.LDriverYAxis),
-    () -> -DriverJoystick.getRawAxis(GamepadJoystick.RDriverXAxis)));
-
-    configureBindings();
+    this.driveMotorSubsystem.setDefaultCommand(new DriveJoystickCmd(this.driveMotorSubsystem, 
+    () -> -this.driverJoystick.getRawAxis(GamepadJoystick.left_Y_Axis),
+    () -> -this.driverJoystick.getRawAxis(GamepadJoystick.right_X_Axis)));
+    this.configureBindings();
   }
 
   private void configureBindings() {
-    // Elvator
-    DriverJoystick.YButton.whileTrue(new ElvatorDriveCmd(ElvatorSubsystem, 0.3));
-    DriverJoystick.AButton.whileTrue(new ElvatorDriveCmd(ElvatorSubsystem, -0.3));
+    // Elevator
+    driverJoystick.buttonY.whileTrue(new ElevatorDriveCmd(elevatorSubsystem, 0.3));
+    driverJoystick.buttonA.whileTrue(new ElevatorDriveCmd(elevatorSubsystem, -0.3));
     // Intake
-    DriverJoystick.XButton.whileTrue(new IntakeDriveCmd(IntakeSubsystem, 0.3));
-    DriverJoystick.BButton.whileTrue(new IntakeDriveCmd(IntakeSubsystem, -0.3));
+    driverJoystick.buttonX.whileTrue(new IntakeDriveCmd(intakeSubsystem, 0.3));
+    driverJoystick.buttonB.whileTrue(new IntakeDriveCmd(intakeSubsystem, -0.3));
     // Arm
-    DriverJoystick.LeftButton.whileTrue(new ArmDriveCmd(ArmSubsystem, 0.3));
-    DriverJoystick.RightButton.whileTrue(new ArmDriveCmd(ArmSubsystem, -0.3));
+    driverJoystick.buttonLeft.whileTrue(new ArmDriveCmd(armSubsystem, 0.3));
+    driverJoystick.buttonRight.whileTrue(new ArmDriveCmd(armSubsystem, -0.3));
   }
 
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
-    new ParallelRaceGroup(new Autos(DriverSubsystem), new WaitCommand(1)));
+    new ParallelRaceGroup(new AutoDriveCmd(this.driveMotorSubsystem), new WaitCommand(1.0)));
   }
 }
