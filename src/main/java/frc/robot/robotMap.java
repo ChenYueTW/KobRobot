@@ -20,7 +20,7 @@ public class RobotMap {
         }
 
         public static class Intake {
-            public static final int Motor_1 = 5;
+            public static final int Motor_1 = 1;
         }
     }
 }

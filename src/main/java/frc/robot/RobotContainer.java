@@ -39,8 +39,8 @@ public class RobotContainer {
     driverJoystick.buttonY.whileTrue(new ElevatorDriveCmd(elevatorSubsystem, 0.3));
     driverJoystick.buttonA.whileTrue(new ElevatorDriveCmd(elevatorSubsystem, -0.3));
     // Intake
-    driverJoystick.buttonX.whileTrue(new IntakeDriveCmd(intakeSubsystem, 0.3));
-    driverJoystick.buttonB.whileTrue(new IntakeDriveCmd(intakeSubsystem, -0.3));
+    driverJoystick.buttonX.whileTrue(new IntakeDriveCmd(intakeSubsystem, 0.2));
+    driverJoystick.buttonB.whileTrue(new IntakeDriveCmd(intakeSubsystem, -0.2));
     // Arm
     driverJoystick.buttonLeft.whileTrue(new ArmDriveCmd(armSubsystem, 0.3));
     driverJoystick.buttonRight.whileTrue(new ArmDriveCmd(armSubsystem, -0.3));

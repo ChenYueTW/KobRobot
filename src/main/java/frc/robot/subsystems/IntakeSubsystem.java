@@ -25,7 +25,7 @@ public class IntakeSubsystem extends SubsystemBase{
         intakeMotor.setIdleMode(IdleMode.kBrake);
     }
 
-    public void setDesiredState(Double Intake_Speed) {
+    public void setDesiredState(Double intakeSpeed) {
         this.intakeSpeed = intakeSpeed * Constants.DriveConstants.intakeSpeed;
 
         intakeMotor.set(this.intakeSpeed);

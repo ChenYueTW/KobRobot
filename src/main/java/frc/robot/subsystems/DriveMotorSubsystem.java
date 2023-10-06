@@ -24,11 +24,11 @@ public class DriveMotorSubsystem extends SubsystemBase {
         rightMotor2.setDesiredState(rightMotorSpeed);
     }
     
-    public void autoDriveMove(double autoDriveSpeed){
-        leftMotor1.setAutoDesiredState(autoDriveSpeed);
-        leftMotor2.setAutoDesiredState(autoDriveSpeed);
-        rightMotor1.setAutoDesiredState(autoDriveSpeed);
-        rightMotor2.setAutoDesiredState(autoDriveSpeed);
+    public void autoDriveMove(double autoDriveLeftSpeed, double autoDriveRightSpeed){
+        leftMotor1.setAutoDesiredState(autoDriveLeftSpeed);
+        leftMotor2.setAutoDesiredState(autoDriveLeftSpeed);
+        rightMotor1.setAutoDesiredState(autoDriveRightSpeed);
+        rightMotor2.setAutoDesiredState(autoDriveRightSpeed);
     }
 
     public void stopModules() {
