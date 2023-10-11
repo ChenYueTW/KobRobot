@@ -35,14 +35,14 @@ public class RobotContainer {
 
   private void configureBindings() {
     // Elevator
-    driverJoystick.buttonY.whileTrue(new ElevatorDriveCmd(elevatorSubsystem, 0.3));
-    driverJoystick.buttonA.whileTrue(new ElevatorDriveCmd(elevatorSubsystem, -0.3));
+    this.driverJoystick.buttonY.whileTrue(new ElevatorDriveCmd(this.elevatorSubsystem, 0.3));
+    this.driverJoystick.buttonA.whileTrue(new ElevatorDriveCmd(this.elevatorSubsystem, -0.3));
     // Intake
-    driverJoystick.buttonX.whileTrue(new IntakeDriveCmd(intakeSubsystem, 0.2));
-    driverJoystick.buttonB.whileTrue(new IntakeDriveCmd(intakeSubsystem, -0.2));
+    this.driverJoystick.buttonX.whileTrue(new IntakeDriveCmd(this.intakeSubsystem, 0.2));
+    this.driverJoystick.buttonB.whileTrue(new IntakeDriveCmd(this.intakeSubsystem, -0.2));
     // Arm
-    driverJoystick.buttonLeft.whileTrue(new ArmDriveCmd(armSubsystem, 0.3));
-    driverJoystick.buttonRight.whileTrue(new ArmDriveCmd(armSubsystem, -0.3));
+    this.driverJoystick.buttonLeft.whileTrue(new ArmDriveCmd(this.armSubsystem, 0.3));
+    this.driverJoystick.buttonRight.whileTrue(new ArmDriveCmd(this.armSubsystem, -0.3));
   }
 
   public Command getAutonomousCommand() {
@@ -57,6 +57,10 @@ public class RobotContainer {
     new SequentialCommandGroup(
       new ParallelRaceGroup(new ElevatorDriveCmd(this.elevatorSubsystem, 0.2), new WaitCommand(1.0)),
       new ParallelRaceGroup(new ElevatorDriveCmd(this.elevatorSubsystem, -0.2), new WaitCommand(1.0))
+    ),
+    new SequentialCommandGroup(
+      new ParallelRaceGroup(new ArmDriveCmd(this.armSubsystem, 0.2), new WaitCommand(1.0)),
+      new ParallelRaceGroup(new ArmDriveCmd(this.armSubsystem, -0.2), new WaitCommand(1.0))
     )
     );
   }
