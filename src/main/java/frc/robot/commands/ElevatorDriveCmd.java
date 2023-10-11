@@ -12,7 +12,7 @@ public class ElevatorDriveCmd extends CommandBase {
         this.elevatorSubsystem = subsystem;
         this.elevatorSpeed = speed;
         
-        this.addRequirements(elevatorSubsystem);
+        this.addRequirements(this.elevatorSubsystem);
     }
 
     @Override

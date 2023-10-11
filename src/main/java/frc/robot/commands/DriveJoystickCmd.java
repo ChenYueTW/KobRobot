@@ -16,7 +16,7 @@ public class DriveJoystickCmd extends CommandBase {
         this.speedSupplier = speedFunction;
         this.turnSupplier = turnFunction;
         
-        this.addRequirements(driveMotorSubsystem);
+        this.addRequirements(this.driveMotorSubsystem);
     }
 
     @Override

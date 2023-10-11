@@ -12,7 +12,7 @@ public class IntakeDriveCmd extends CommandBase {
         this.intakeSubsystem = subsystem;
         this.intakeSpeed = intakeSpeed;
         
-        this.addRequirements(intakeSubsystem);
+        this.addRequirements(this.intakeSubsystem);
     }
 
     @Override
