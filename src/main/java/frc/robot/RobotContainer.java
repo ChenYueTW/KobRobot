@@ -25,7 +25,7 @@ public class RobotContainer {
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(); 
   private final ArmSubsystem armSubsystem = new ArmSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  private final GamepadJoystick driverJoystick = new GamepadJoystick(GamepadJoystick.Controller_Port);
+  private final GamepadJoystick driverJoystick = new GamepadJoystick(GamepadJoystick.CONTROLLER_PORT);
 
   public RobotContainer() {
     this.driveMotorSubsystem.setDefaultCommand(new DriveJoystickCmd(this.driveMotorSubsystem, 
@@ -48,6 +48,12 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
-    new ParallelRaceGroup(new AutoDriveCmd(this.driveMotorSubsystem, 0.3), new WaitCommand(1.0)));
+      new ParallelRaceGroup(new AutoDriveCmd(this.driveMotorSubsystem, 0.3), new WaitCommand(1.0)),
+      new ParallelRaceGroup(new AutoDriveCmd(this.driveMotorSubsystem, -0.3), new WaitCommand(1.0)),
+    new SequentialCommandGroup(
+        new ParallelRaceGroup(new IntakeDriveCmd(intakeSubsystem, 0.2), new WaitCommand(1.0)),
+        new ParallelRaceGroup(new IntakeDriveCmd(intakeSubsystem, -0.2), new WaitCommand(1.0))
+        )
+    );
   }
 }

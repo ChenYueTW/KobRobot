@@ -10,7 +10,7 @@ public class GamepadJoystick extends Joystick{
     }
     
     // COM ID
-    public static final int Controller_Port = 0;
+    public static final int CONTROLLER_PORT = 0;
     
     // Axis ID
     public static final int left_X_Axis = 0;
