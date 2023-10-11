@@ -20,7 +20,7 @@ public class AutoDriveCmd extends CommandBase {
 
     @Override
     public void execute() {
-        this.driveMotorSubsystem.autoDriveMove(autoDriveSpeed, autoDriveSpeed);
+        this.driveMotorSubsystem.autoDriveMove(this.autoDriveSpeed, this.autoDriveSpeed);
     }
 
     @Override

@@ -8,9 +8,9 @@ public class ElevatorDriveCmd extends CommandBase {
     private final ElevatorSubsystem elevatorSubsystem;
     private final double elevatorSpeed;
 
-    public ElevatorDriveCmd(ElevatorSubsystem subsystem, double speed) {
+    public ElevatorDriveCmd(ElevatorSubsystem subsystem, double elevatorSpeed) {
         this.elevatorSubsystem = subsystem;
-        this.elevatorSpeed = speed;
+        this.elevatorSpeed = elevatorSpeed;
         
         this.addRequirements(this.elevatorSubsystem);
     }
