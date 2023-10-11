@@ -48,6 +48,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
-    new ParallelRaceGroup(new AutoDriveCmd(this.driveMotorSubsystem), new WaitCommand(1.0)));
+    new ParallelRaceGroup(new AutoDriveCmd(this.driveMotorSubsystem, 0.3), new WaitCommand(1.0)));
   }
 }
