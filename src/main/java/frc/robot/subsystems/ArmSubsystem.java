@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
-import frc.robot.Constants;
-import frc.robot.RobotMap;
+import frc.robot.MotorIds;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -11,28 +10,25 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmSubsystem extends SubsystemBase{
-    private CANSparkMax armMotor;
-    private double armSpeed;
+    private final CANSparkMax armMotor;
 
     public ArmSubsystem() {
-        armMotor = new CANSparkMax(RobotMap.DriverPort.Arm.Motor_1, MotorType.kBrushless);
+        this.armMotor = new CANSparkMax(MotorIds.Arm.Motor1, MotorType.kBrushless);
 
-        armMotor.setSmartCurrentLimit(30);
+        this.armMotor.setSmartCurrentLimit(30);
         
-        armMotor.setInverted(false);
+        this.armMotor.setInverted(false);
 
         // kBrake & kCoast
-        armMotor.setIdleMode(IdleMode.kBrake);
+        this.armMotor.setIdleMode(IdleMode.kBrake);
     }
 
-    public void setDesiredState(Double armSpeed) {
-        this.armSpeed = armSpeed * Constants.DriveConstants.armSpeed;
-        armMotor.set(this.armSpeed);
-
+    public void setDesiredState(double armSpeed) {
+        this.armMotor.set(armSpeed);
         SmartDashboard.putNumber("Arm-Speed: ", armSpeed);
     }
 
     public void stop() {
-        armMotor.set(0);
+        this.armMotor.set(0);
     }
 }

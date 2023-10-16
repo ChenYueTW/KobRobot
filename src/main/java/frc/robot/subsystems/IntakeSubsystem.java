@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import frc.robot.RobotMap;
+import frc.robot.MotorIds;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -15,7 +15,7 @@ public class IntakeSubsystem extends SubsystemBase{
     private double intakeSpeed;
 
     public IntakeSubsystem() {
-        intakeMotor = new CANSparkMax(RobotMap.DriverPort.Intake.Motor_1, MotorType.kBrushless);
+        intakeMotor = new CANSparkMax(MotorIds.Intake.Motor1, MotorType.kBrushless);
 
         intakeMotor.setSmartCurrentLimit(30);
 
@@ -25,10 +25,8 @@ public class IntakeSubsystem extends SubsystemBase{
         intakeMotor.setIdleMode(IdleMode.kBrake);
     }
 
-    public void setDesiredState(Double intakeSpeed) {
-        this.intakeSpeed = intakeSpeed * Constants.DriveConstants.intakeSpeed;
-
-        intakeMotor.set(this.intakeSpeed);
+    public void setDesiredState(double intakeSpeed) {
+        intakeMotor.set(intakeSpeed);
 
         SmartDashboard.putNumber("Intake-Speed: ", this.intakeSpeed);
     }

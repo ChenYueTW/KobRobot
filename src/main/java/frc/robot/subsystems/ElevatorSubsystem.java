@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import frc.robot.RobotMap;
+import frc.robot.MotorIds;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -11,36 +11,33 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ElevatorSubsystem extends SubsystemBase{
-    private CANSparkMax elevatorMotor1;
-    private CANSparkMax elevatorMotor2;
-    private double elevatorSpeed;
+    private final CANSparkMax elevatorMotor1;
+    private final CANSparkMax elevatorMotor2;
 
     public ElevatorSubsystem() {
-        elevatorMotor1 = new CANSparkMax(RobotMap.DriverPort.Elevator.Motor_1, MotorType.kBrushless);
-        elevatorMotor2 = new CANSparkMax(RobotMap.DriverPort.Elevator.Motor_2, MotorType.kBrushless);
+        this.elevatorMotor1 = new CANSparkMax(MotorIds.Elevator.Motor_1, MotorType.kBrushless);
+        this.elevatorMotor2 = new CANSparkMax(MotorIds.Elevator.Motor_2, MotorType.kBrushless);
 
-        elevatorMotor1.setSmartCurrentLimit(30);
-        elevatorMotor2.setSmartCurrentLimit(30);
+        this.elevatorMotor1.setSmartCurrentLimit(30);
+        this.elevatorMotor2.setSmartCurrentLimit(30);
 
-        elevatorMotor1.setInverted(false);
-        elevatorMotor2.setInverted(false);
+        this.elevatorMotor1.setInverted(false);
+        this.elevatorMotor2.setInverted(false);
 
         // kBrake & kCoast
-        elevatorMotor1.setIdleMode(IdleMode.kBrake);
-        elevatorMotor2.setIdleMode(IdleMode.kBrake);
+        this.elevatorMotor1.setIdleMode(IdleMode.kBrake);
+        this.elevatorMotor2.setIdleMode(IdleMode.kBrake);
     }
 
     public void setDesiredState(Double elevatorSpeed) {
-        this.elevatorSpeed = elevatorSpeed * Constants.DriveConstants.elevatorSpeed;
+        this.elevatorMotor1.set(elevatorSpeed);
+        this.elevatorMotor2.set(elevatorSpeed);
 
-        elevatorMotor1.set(this.elevatorSpeed);
-        elevatorMotor2.set(this.elevatorSpeed);
-
-        SmartDashboard.putNumber("Elevator-Speed: ", this.elevatorSpeed);
+        SmartDashboard.putNumber("Elevator-Speed: ", elevatorSpeed);
     }
 
     public void stop() {
-        elevatorMotor1.set(0);
-        elevatorMotor2.set(0);
+        this.elevatorMotor1.set(0.0);
+        this.elevatorMotor2.set(0.0);
     }
 }

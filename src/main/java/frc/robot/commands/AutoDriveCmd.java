@@ -1,16 +1,17 @@
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveMotorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class AutoDriveCmd extends CommandBase {
     private final DriveMotorSubsystem driveMotorSubsystem;
-    private final double autoDriveSpeed;
+	private final boolean direction;
  
-    public AutoDriveCmd(DriveMotorSubsystem subsystem, double autoDriveSpeed){
+    public AutoDriveCmd(DriveMotorSubsystem subsystem, boolean direction){
         this.driveMotorSubsystem = subsystem;
-        this.autoDriveSpeed = autoDriveSpeed;
+		this.direction = direction;
 
         this.addRequirements(this.driveMotorSubsystem);
     }
@@ -20,7 +21,7 @@ public class AutoDriveCmd extends CommandBase {
 
     @Override
     public void execute() {
-        this.driveMotorSubsystem.autoDriveMove(this.autoDriveSpeed, this.autoDriveSpeed);
+        this.driveMotorSubsystem.autoDriveMove(Constants.Drive.DRIVE_SPEED_AUTO * (direction ? 1 : -1));
     }
 
     @Override

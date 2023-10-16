@@ -12,32 +12,32 @@ public class DriveMotorModule {
     private double driveSpeed;
     private double autoDriveSpeed;
 
-    public DriveMotorModule(int motorPort, boolean reverse) {
-        motor = new VictorSPX(motorPort);
+    public DriveMotorModule(int motorPort, boolean inverted) {
+        this.motor = new VictorSPX(motorPort);
 
-        motor.setInverted(reverse);
+        this.motor.setInverted(inverted);
 
         // Brake & Coast
-        motor.setNeutralMode(NeutralMode.Brake);
+        this.motor.setNeutralMode(NeutralMode.Brake);
     }
 
     public void setDesiredState(double driveSpeed) {
-        this.driveSpeed = driveSpeed * Constants.DriveConstants.driveSpeed;
+        this.driveSpeed = driveSpeed * Constants.Drive.DRIVE_SPEED;
         
-        motor.set(ControlMode.PercentOutput, this.driveSpeed);
+        this.motor.set(ControlMode.PercentOutput, this.driveSpeed);
 
         SmartDashboard.putNumber("CIM-Speed: ", this.driveSpeed); 
     }
 
     public void setAutoDesiredState(double autoDriveSpeed){
-        this.autoDriveSpeed = autoDriveSpeed * Constants.DriveConstants.autoDirveSpeed;
+        this.autoDriveSpeed = autoDriveSpeed * Constants.Drive.DRIVE_SPEED_AUTO;
 
-        motor.set(ControlMode.PercentOutput, this.autoDriveSpeed);
+        this.motor.set(ControlMode.PercentOutput, this.autoDriveSpeed);
 
         SmartDashboard.putNumber("Auto-Speed: ", this.autoDriveSpeed);
     }
 
     public void stop() {
-        motor.set(ControlMode.PercentOutput, 0);
+        this.motor.set(ControlMode.PercentOutput, 0);
     }
 }

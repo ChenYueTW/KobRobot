@@ -25,7 +25,7 @@ public class DriveJoystickCmd extends CommandBase {
     @Override
     public void execute() {
         double driveSpeed = speedSupplier.get();
-        double turnSpeed = turnSupplier.get() * Constants.DriveConstants.turnSpeed;
+        double turnSpeed = turnSupplier.get() * Constants.Drive.TURN_SPEED;
 
         double leftDriveSpeed = driveSpeed - turnSpeed;
         double rightDriveSpeed = driveSpeed + turnSpeed;

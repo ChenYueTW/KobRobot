@@ -1,16 +1,17 @@
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ElevatorDriveCmd extends CommandBase {
     private final ElevatorSubsystem elevatorSubsystem;
-    private final double elevatorSpeed;
+    private final boolean direction;
 
-    public ElevatorDriveCmd(ElevatorSubsystem subsystem, double elevatorSpeed) {
+    public ElevatorDriveCmd(ElevatorSubsystem subsystem, boolean direction) {
         this.elevatorSubsystem = subsystem;
-        this.elevatorSpeed = elevatorSpeed;
+        this.direction = direction;
         
         this.addRequirements(this.elevatorSubsystem);
     }
@@ -20,7 +21,7 @@ public class ElevatorDriveCmd extends CommandBase {
 
     @Override
     public void execute() {
-        this.elevatorSubsystem.setDesiredState(this.elevatorSpeed);
+        this.elevatorSubsystem.setDesiredState(Constants.Drive.ELEVATOR_SPEED * (direction ? 1 : -1));
     }
 
     @Override
