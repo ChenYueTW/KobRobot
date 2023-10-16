@@ -15,8 +15,8 @@ public class ElevatorSubsystem extends SubsystemBase{
     private final CANSparkMax elevatorMotor2;
 
     public ElevatorSubsystem() {
-        this.elevatorMotor1 = new CANSparkMax(MotorIds.Elevator.Motor_1, MotorType.kBrushless);
-        this.elevatorMotor2 = new CANSparkMax(MotorIds.Elevator.Motor_2, MotorType.kBrushless);
+        this.elevatorMotor1 = new CANSparkMax(MotorIds.Elevator.Motor1, MotorType.kBrushless);
+        this.elevatorMotor2 = new CANSparkMax(MotorIds.Elevator.Motor2, MotorType.kBrushless);
 
         this.elevatorMotor1.setSmartCurrentLimit(30);
         this.elevatorMotor2.setSmartCurrentLimit(30);

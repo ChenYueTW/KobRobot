@@ -11,10 +11,10 @@ public class DriveMotorSubsystem extends SubsystemBase {
     private final DriveMotorModule rightMotor2;
 
     public DriveMotorSubsystem() {
-        this.leftMotor1 = new DriveMotorModule(MotorIds.PWM.Left_Motor_1, false);
-        this.leftMotor2 = new DriveMotorModule(MotorIds.PWM.Left_Motor_2, false);
-        this.rightMotor1 = new DriveMotorModule(MotorIds.PWM.Right_Motor_1, true);
-        this.rightMotor2 = new DriveMotorModule(MotorIds.PWM.Right_Motor_2, true);
+        this.leftMotor1 = new DriveMotorModule(MotorIds.PWM.LeftMotor1, false);
+        this.leftMotor2 = new DriveMotorModule(MotorIds.PWM.LeftMotor2, false);
+        this.rightMotor1 = new DriveMotorModule(MotorIds.PWM.RightMotor1, true);
+        this.rightMotor2 = new DriveMotorModule(MotorIds.PWM.RightMotor2, true);
     }
 
     public void driverMove(double leftMotorSpeed, double rightMotorSpeed) {
