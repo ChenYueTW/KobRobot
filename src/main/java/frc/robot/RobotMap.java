@@ -16,7 +16,6 @@ public class RobotMap {
 
         public static class Arm {
             public static final int Motor_1 = 2;
-            public static final int Motor_2 = 3;
         }
 
         public static class Intake {

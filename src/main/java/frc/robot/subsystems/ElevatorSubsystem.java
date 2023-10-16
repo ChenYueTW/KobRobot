@@ -26,7 +26,7 @@ public class ElevatorSubsystem extends SubsystemBase{
         elevatorMotor2.setInverted(false);
 
         // kBrake & kCoast
-        elevatorMotor1.setIdleMode(IdleMode.kBrake); 
+        elevatorMotor1.setIdleMode(IdleMode.kBrake);
         elevatorMotor2.setIdleMode(IdleMode.kBrake);
     }
 
@@ -36,7 +36,7 @@ public class ElevatorSubsystem extends SubsystemBase{
         elevatorMotor1.set(this.elevatorSpeed);
         elevatorMotor2.set(this.elevatorSpeed);
 
-        SmartDashboard.putNumber("Elvator-Speed: ", this.elevatorSpeed);
+        SmartDashboard.putNumber("Elevator-Speed: ", this.elevatorSpeed);
     }
 
     public void stop() {

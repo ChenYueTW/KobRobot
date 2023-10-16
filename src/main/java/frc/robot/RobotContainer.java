@@ -35,11 +35,11 @@ public class RobotContainer {
 
   private void configureBindings() {
     // Elevator
-    this.driverJoystick.buttonY.whileTrue(new ElevatorDriveCmd(this.elevatorSubsystem, 0.3));
-    this.driverJoystick.buttonA.whileTrue(new ElevatorDriveCmd(this.elevatorSubsystem, -0.3));
+    this.driverJoystick.buttonY.whileTrue(new ElevatorDriveCmd(this.elevatorSubsystem, 0.2));
+    this.driverJoystick.buttonA.whileTrue(new ElevatorDriveCmd(this.elevatorSubsystem, -0.2));
     // Intake
     this.driverJoystick.buttonX.whileTrue(new IntakeDriveCmd(this.intakeSubsystem, 0.2));
-    this.driverJoystick.buttonB.whileTrue(new IntakeDriveCmd(this.intakeSubsystem, -0.2));
+    this.driverJoystick.buttonB.whileTrue(new IntakeDriveCmd(this.intakeSubsystem, -0.8));
     // Arm
     this.driverJoystick.buttonLeft.whileTrue(new ArmDriveCmd(this.armSubsystem, 0.3));
     this.driverJoystick.buttonRight.whileTrue(new ArmDriveCmd(this.armSubsystem, -0.3));
@@ -47,21 +47,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
-      new ParallelRaceGroup(new AutoDriveCmd(this.driveMotorSubsystem, 0.3), new WaitCommand(1.0)),
-      new ParallelRaceGroup(new AutoDriveCmd(this.driveMotorSubsystem, -0.3), new WaitCommand(1.0)),
-
-    new SequentialCommandGroup(
-      new ParallelRaceGroup(new IntakeDriveCmd(this.intakeSubsystem, 0.2), new WaitCommand(1.0)),
-      new ParallelRaceGroup(new IntakeDriveCmd(this.intakeSubsystem, -0.2), new WaitCommand(1.0))
-    ),
-    new SequentialCommandGroup(
-      new ParallelRaceGroup(new ElevatorDriveCmd(this.elevatorSubsystem, 0.2), new WaitCommand(1.0)),
-      new ParallelRaceGroup(new ElevatorDriveCmd(this.elevatorSubsystem, -0.2), new WaitCommand(1.0))
-    ),
-    new SequentialCommandGroup(
-      new ParallelRaceGroup(new ArmDriveCmd(this.armSubsystem, 0.2), new WaitCommand(1.0)),
-      new ParallelRaceGroup(new ArmDriveCmd(this.armSubsystem, -0.2), new WaitCommand(1.0))
-    )
-    );
+      new ParallelRaceGroup(new AutoDriveCmd(this.driveMotorSubsystem, 0.3), new WaitCommand(1.0)));
   }
 }
