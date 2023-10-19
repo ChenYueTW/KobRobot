@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ElevatorSubsystem extends SubsystemBase{
+    private static final double SPEED = Constants.Drive.ELEVATOR_SPEED;
     private final CANSparkMax elevatorMotor1;
     private final CANSparkMax elevatorMotor2;
 
@@ -29,6 +30,10 @@ public class ElevatorSubsystem extends SubsystemBase{
         this.elevatorMotor2.setIdleMode(IdleMode.kBrake);
     }
 
+    public void elevate(boolean direction) {
+        this.setDesiredState(SPEED * (direction ? 1 : -1));
+    }
+
     public void setDesiredState(Double elevatorSpeed) {
         this.elevatorMotor1.set(elevatorSpeed);
         this.elevatorMotor2.set(elevatorSpeed);
@@ -36,7 +41,7 @@ public class ElevatorSubsystem extends SubsystemBase{
         SmartDashboard.putNumber("Elevator-Speed: ", elevatorSpeed);
     }
 
-    public void stop() {
+    public void stopModules() {
         this.elevatorMotor1.set(0.0);
         this.elevatorMotor2.set(0.0);
     }

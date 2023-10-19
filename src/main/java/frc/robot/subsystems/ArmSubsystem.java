@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.robot.Constants;
 import frc.robot.MotorIds;
 
 import com.revrobotics.CANSparkMax;
@@ -28,7 +29,11 @@ public class ArmSubsystem extends SubsystemBase{
         SmartDashboard.putNumber("Arm-Speed: ", armSpeed);
     }
 
-    public void stop() {
+    public void arm(boolean direction){
+        this.setDesiredState(Constants.Drive.ARM_SPEED * (direction ? 1 : -1));
+    }
+
+    public void stopModules() {
         this.armMotor.set(0);
     }
 }

@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveMotorModule {
     private final VictorSPX motor;
     private double driveSpeed;
-    private double autoDriveSpeed;
 
     public DriveMotorModule(int motorPort, boolean inverted) {
         this.motor = new VictorSPX(motorPort);
@@ -30,11 +29,9 @@ public class DriveMotorModule {
     }
 
     public void setAutoDesiredState(double autoDriveSpeed){
-        this.autoDriveSpeed = autoDriveSpeed * Constants.Drive.DRIVE_SPEED_AUTO;
+        this.motor.set(ControlMode.PercentOutput, autoDriveSpeed);
 
-        this.motor.set(ControlMode.PercentOutput, this.autoDriveSpeed);
-
-        SmartDashboard.putNumber("Auto-Speed: ", this.autoDriveSpeed);
+        SmartDashboard.putNumber("Auto-Speed: ", autoDriveSpeed);
     }
 
     public void stop() {

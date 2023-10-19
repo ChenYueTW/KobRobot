@@ -1,7 +1,8 @@
 package frc.robot.subsystems;
 
+import frc.robot.Constants;
 import frc.robot.MotorIds;
-
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveMotorSubsystem extends SubsystemBase { 
@@ -23,12 +24,12 @@ public class DriveMotorSubsystem extends SubsystemBase {
         this.rightMotor1.setDesiredState(rightMotorSpeed);
         this.rightMotor2.setDesiredState(rightMotorSpeed);
     }
-    
-    public void autoDriveMove(double autoDriveSpeed){
-        this.leftMotor2.setAutoDesiredState(autoDriveSpeed);
-        this.leftMotor1.setAutoDesiredState(autoDriveSpeed);
-        this.rightMotor1.setAutoDesiredState(autoDriveSpeed);
-        this.rightMotor2.setAutoDesiredState(autoDriveSpeed);
+
+    public void autoDriveSystem(boolean direction){
+        this.leftMotor1.setAutoDesiredState(Constants.Drive.DRIVE_SPEED_AUTO * (direction ? 1 : -1));
+        this.leftMotor2.setAutoDesiredState(Constants.Drive.DRIVE_SPEED_AUTO * (direction ? 1 : -1));
+        this.rightMotor1.setAutoDesiredState(Constants.Drive.DRIVE_SPEED_AUTO * (direction ? 1 : -1));
+        this.rightMotor2.setAutoDesiredState(Constants.Drive.DRIVE_SPEED_AUTO * (direction ? 1 : -1));
     }
 
     public void stopModules() {
