@@ -31,6 +31,13 @@ public class DriveMotorSubsystem extends SubsystemBase {
         this.rightMotor2.setAutoDesiredState(Constants.Drive.DRIVE_SPEED_AUTO * (direction ? 1 : -1));
     }
 
+    public void autoTrunDriveSystem(boolean direction){
+        this.leftMotor1.setAutoDesiredState(Constants.Drive.TURN_SPEED_AUTO * (direction ? 1 : -1));
+        this.leftMotor2.setAutoDesiredState(Constants.Drive.TURN_SPEED_AUTO * (direction ? 1 : -1));
+        this.rightMotor1.setAutoDesiredState(-Constants.Drive.TURN_SPEED_AUTO * (direction ? 1 : -1));
+        this.rightMotor2.setAutoDesiredState(-Constants.Drive.TURN_SPEED_AUTO * (direction ? 1 : -1));
+    }
+
     public void stopModules() {
         this.leftMotor1.stop();
         this.leftMotor2.stop();

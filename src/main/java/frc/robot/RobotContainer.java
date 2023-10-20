@@ -4,7 +4,7 @@ import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveMotorSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
@@ -31,6 +31,8 @@ public class RobotContainer {
     double leftDriveSpeed = driveSpeed - turnSpeed;
     double rightDriveSpeed = driveSpeed + turnSpeed;
     this.driveMotorSubsystem.driverMove(leftDriveSpeed, rightDriveSpeed);
+    SmartDashboard.putNumber("Left-Speed", leftDriveSpeed);
+    SmartDashboard.putNumber("Right-Speed", rightDriveSpeed);
   }
 
   private void runElevatorDefaultCommand() {
@@ -71,10 +73,24 @@ public class RobotContainer {
     this.driveMotorSubsystem.autoDriveSystem(false);
   }
 
+  private void autoTurnLeftDriveCommand(){
+    this.driveMotorSubsystem.autoTrunDriveSystem(false);
+  }
+
+  private void autoTurnRightDriveCommand(){
+    this.driveMotorSubsystem.autoTrunDriveSystem(true);
+  }
+
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
       new ParallelRaceGroup(Commands.runEnd(this::autoDriveCommand, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(1.0)),
       new WaitCommand(1.0),
-      new ParallelRaceGroup(Commands.runEnd(this::autoDriveCommandForward, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(1.0)));
+      new ParallelRaceGroup(Commands.runEnd(this::autoDriveCommandForward, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(1.0)),
+      new WaitCommand(1.0),
+
+      new ParallelRaceGroup(Commands.runEnd(this::autoTurnLeftDriveCommand, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(2.0)),
+      new WaitCommand(1.0),
+      new ParallelRaceGroup(Commands.runEnd(this::autoTurnRightDriveCommand, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(2.0))
+    );
   }
 }
