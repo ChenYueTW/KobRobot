@@ -1,8 +1,12 @@
 package frc.robot;
 
+import frc.robot.auto.AutoBalance;
+import frc.robot.auto.AutoMethod;
+import frc.robot.commands.ArmCmd;
+import frc.robot.commands.DriveJoystickCmd;
+import frc.robot.commands.IntakeCmd;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveMotorSubsystem;
-import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -12,85 +16,51 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class RobotContainer {
-  private final DriveMotorSubsystem driveMotorSubsystem = new DriveMotorSubsystem();
-  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(); 
-  private final ArmSubsystem armSubsystem = new ArmSubsystem();
-  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  private final GamepadJoystick driverJoystick = new GamepadJoystick(GamepadJoystick.CONTROLLER_PORT);
+	private final DriveMotorSubsystem driveMotorSubsystem = new DriveMotorSubsystem();
+	private final ArmSubsystem armSubsystem = new ArmSubsystem();
+	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+	private final GamepadJoystick driverJoystick = new GamepadJoystick(GamepadJoystick.DRIVER_CONTROLLER_PORT);
+	private final GamepadJoystick takeJoystick = new GamepadJoystick(GamepadJoystick.ARM_CONTORLLER_PORT);
+	private final AutoMethod autoMethod = new AutoMethod();
+	private final DriveJoystickCmd driveCommand = new DriveJoystickCmd(driveMotorSubsystem, driverJoystick);
+	private final IntakeCmd intakeCommand = new IntakeCmd(intakeSubsystem, takeJoystick);
+	private final ArmCmd armCommand = new ArmCmd(armSubsystem, takeJoystick);
 
-  public RobotContainer() {
-    this.driveMotorSubsystem.setDefaultCommand(Commands.run(this::driveRobot, this.driveMotorSubsystem));
-    this.elevatorSubsystem.setDefaultCommand(Commands.run(this::runElevatorDefaultCommand, this.elevatorSubsystem));
-    this.armSubsystem.setDefaultCommand(Commands.run(this::runArmDefaultCommand, this.armSubsystem));
-    this.intakeSubsystem.setDefaultCommand(Commands.run(this::runIntakeDefaultCommand, this.intakeSubsystem));
-  }
+	public RobotContainer() {
+		this.driveMotorSubsystem.setDefaultCommand(driveCommand);
+		this.intakeSubsystem.setDefaultCommand(intakeCommand);
+		this.armSubsystem.setDefaultCommand(armCommand);
+	}
 
-  private void driveRobot() {
-    double driveSpeed = this.driverJoystick.getRobotDriveSpeed();
-    double turnSpeed = this.driverJoystick.getRobotRotateSpeed();
-    double leftDriveSpeed = driveSpeed - turnSpeed;
-    double rightDriveSpeed = driveSpeed + turnSpeed;
-    this.driveMotorSubsystem.driverMove(leftDriveSpeed, rightDriveSpeed);
-    SmartDashboard.putNumber("Left-Speed", leftDriveSpeed);
-    SmartDashboard.putNumber("Right-Speed", rightDriveSpeed);
-  }
+	public void onRobotPeriodic() {
+		SmartDashboard.putNumber("Gyro-Pitch", this.driveMotorSubsystem.getPitch());
+	}
 
-  private void runElevatorDefaultCommand() {
-    if (this.driverJoystick.getYButton()) {
-      this.elevatorSubsystem.elevate(true);
-    } else if (this.driverJoystick.getAButton()) {
-      this.elevatorSubsystem.elevate(false);
-    } else {
-      this.elevatorSubsystem.stopModules();
-    }
-  }
-
-  private void runArmDefaultCommand() {
-    if (this.driverJoystick.getLeftBumper()) {
-      this.armSubsystem.arm(true);
-    } else if (this.driverJoystick.getRightBumper()) {
-      this.armSubsystem.arm(false);
-    } else {
-      this.armSubsystem.stopModules();
-    }
-  }
-
-  private void runIntakeDefaultCommand(){
-    if (this.driverJoystick.getXButton()){
-      this.intakeSubsystem.intake(true);
-    } else if(this.driverJoystick.getBButton()){
-      this.intakeSubsystem.intake(false);
-    } else{
-      this.intakeSubsystem.stopModules();
-    }
-  }
-
-  private void autoDriveCommand(){
-    this.driveMotorSubsystem.autoDriveSystem(true);
-  }
-
-  private void autoDriveCommandForward(){
-    this.driveMotorSubsystem.autoDriveSystem(false);
-  }
-
-  private void autoTurnLeftDriveCommand(){
-    this.driveMotorSubsystem.autoTrunDriveSystem(false);
-  }
-
-  private void autoTurnRightDriveCommand(){
-    this.driveMotorSubsystem.autoTrunDriveSystem(true);
-  }
-
-  public Command getAutonomousCommand() {
-    return new SequentialCommandGroup(
-      new ParallelRaceGroup(Commands.runEnd(this::autoDriveCommand, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(1.0)),
-      new WaitCommand(1.0),
-      new ParallelRaceGroup(Commands.runEnd(this::autoDriveCommandForward, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(1.0)),
-      new WaitCommand(1.0),
-
-      new ParallelRaceGroup(Commands.runEnd(this::autoTurnLeftDriveCommand, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(2.0)),
-      new WaitCommand(1.0),
-      new ParallelRaceGroup(Commands.runEnd(this::autoTurnRightDriveCommand, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(2.0))
-    );
-  }
+	public Command getAutonomousCommand() {
+		return new SequentialCommandGroup(
+			new SequentialCommandGroup(
+				new ParallelRaceGroup(Commands.runEnd(this.autoMethod::forwardDrive, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(1.0)),
+				new WaitCommand(1.0),
+				new ParallelRaceGroup(Commands.runEnd(this.autoMethod::backwardDrvie, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(1.0)),
+				new WaitCommand(1.0),
+				new ParallelRaceGroup(Commands.runEnd(this.autoMethod::turnLeftDrive, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(1.0)),
+				new WaitCommand(1.0),
+				new ParallelRaceGroup(Commands.runEnd(this.autoMethod::turnRightDrive, this.driveMotorSubsystem::stopModules, this.driveMotorSubsystem), new WaitCommand(1.0)),
+				new WaitCommand(1.0)
+			),
+			new SequentialCommandGroup(
+				new ParallelRaceGroup(Commands.runEnd(this.autoMethod::pullSystem, this.intakeSubsystem::stopModules, this.intakeSubsystem), new WaitCommand(1.0)),
+				new WaitCommand(1.0),
+				new ParallelRaceGroup(Commands.runEnd(this.autoMethod::pushSystem, this.intakeSubsystem::stopModules, this.intakeSubsystem), new WaitCommand(1.0)),
+				new WaitCommand(1.0)
+			),
+			new SequentialCommandGroup(
+				new ParallelRaceGroup(Commands.runEnd(this.autoMethod::armUp, this.armSubsystem::stopModules, this.armSubsystem), new WaitCommand(1.0)),
+				new WaitCommand(1.0),
+				new ParallelRaceGroup(Commands.runEnd(this.autoMethod::armDown, this.armSubsystem::stopModules, this.armSubsystem), new WaitCommand(1.0)),
+				new WaitCommand(1.0)
+			),
+			new AutoBalance(driveMotorSubsystem)
+		);
+	}
 }

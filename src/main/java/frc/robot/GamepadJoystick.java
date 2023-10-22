@@ -5,7 +5,8 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public class GamepadJoystick extends XboxController {    
     // COM ID
-    public static final int CONTROLLER_PORT = 0;
+    public static final int DRIVER_CONTROLLER_PORT = 0;
+    public static final int ARM_CONTORLLER_PORT = 1;
     private static final double DEADBAND = 0.05;
 
     public GamepadJoystick(final int port) {

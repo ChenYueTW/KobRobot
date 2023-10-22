@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import frc.robot.Constants;
 import frc.robot.MotorIds;
 
 import com.revrobotics.CANSparkMax;
@@ -28,10 +27,6 @@ public class IntakeSubsystem extends SubsystemBase{
     public void setDesiredState(double intakeSpeed) {
         this.intakeMotor.set(intakeSpeed);
         SmartDashboard.putNumber("Intake-Speed: ", this.intakeSpeed);
-    }
-
-    public void intake(boolean direction){
-        this.setDesiredState(Constants.Drive.INTAKE_SPEED * (direction ? 1 : -1));
     }
 
     public void stopModules() {

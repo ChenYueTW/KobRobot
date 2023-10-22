@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
   private Command autonomousCommand;
-  
   private RobotContainer robotContainer;
 
   @Override
@@ -17,6 +16,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    this.robotContainer.onRobotPeriodic();
   }
 
   @Override

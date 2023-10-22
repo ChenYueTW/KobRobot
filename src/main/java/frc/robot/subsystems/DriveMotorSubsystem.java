@@ -1,20 +1,28 @@
 package frc.robot.subsystems;
 
-import frc.robot.Constants;
 import frc.robot.MotorIds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SerialPort;
 
 public class DriveMotorSubsystem extends SubsystemBase { 
     private final DriveMotorModule leftMotor1;
     private final DriveMotorModule leftMotor2;
     private final DriveMotorModule rightMotor1;
     private final DriveMotorModule rightMotor2;
-
+    private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
+    
     public DriveMotorSubsystem() {
         this.leftMotor1 = new DriveMotorModule(MotorIds.PWM.LeftMotor1, false);
         this.leftMotor2 = new DriveMotorModule(MotorIds.PWM.LeftMotor2, false);
         this.rightMotor1 = new DriveMotorModule(MotorIds.PWM.RightMotor1, true);
         this.rightMotor2 = new DriveMotorModule(MotorIds.PWM.RightMotor2, true);
+        // gyro.reset();
+    }
+
+    public double getPitch(){
+        return Math.IEEEremainder(gyro.getPitch(), 360);
     }
 
     public void driverMove(double leftMotorSpeed, double rightMotorSpeed) {
@@ -24,18 +32,32 @@ public class DriveMotorSubsystem extends SubsystemBase {
         this.rightMotor2.setDesiredState(rightMotorSpeed);
     }
 
-    public void autoDriveSystem(boolean direction){
-        this.leftMotor1.setAutoDesiredState(Constants.Drive.DRIVE_SPEED_AUTO * (direction ? 1 : -1));
-        this.leftMotor2.setAutoDesiredState(Constants.Drive.DRIVE_SPEED_AUTO * (direction ? 1 : -1));
-        this.rightMotor1.setAutoDesiredState(Constants.Drive.DRIVE_SPEED_AUTO * (direction ? 1 : -1));
-        this.rightMotor2.setAutoDesiredState(Constants.Drive.DRIVE_SPEED_AUTO * (direction ? 1 : -1));
+    public void autoDrive(double motorSpeed) {
+        this.leftMotor1.setDesiredState(motorSpeed);
+        this.leftMotor2.setDesiredState(motorSpeed);
+        this.rightMotor1.setDesiredState(motorSpeed);
+        this.rightMotor2.setDesiredState(motorSpeed);
     }
 
-    public void autoTrunDriveSystem(boolean direction){
-        this.leftMotor1.setAutoDesiredState(Constants.Drive.TURN_SPEED_AUTO * (direction ? 1 : -1));
-        this.leftMotor2.setAutoDesiredState(Constants.Drive.TURN_SPEED_AUTO * (direction ? 1 : -1));
-        this.rightMotor1.setAutoDesiredState(-Constants.Drive.TURN_SPEED_AUTO * (direction ? 1 : -1));
-        this.rightMotor2.setAutoDesiredState(-Constants.Drive.TURN_SPEED_AUTO * (direction ? 1 : -1));
+    public void autoTrunLeftDrive(double motorSpeed){
+        this.leftMotor1.setAutoDesiredState(-motorSpeed);
+        this.leftMotor2.setAutoDesiredState(-motorSpeed);
+        this.rightMotor1.setAutoDesiredState(motorSpeed);
+        this.rightMotor2.setAutoDesiredState(motorSpeed);
+    }
+
+    public void autoTurnRightDrive(double motorSpeed) {
+        this.leftMotor1.setAutoDesiredState(motorSpeed);
+        this.leftMotor2.setAutoDesiredState(motorSpeed);
+        this.rightMotor1.setAutoDesiredState(-motorSpeed);
+        this.rightMotor2.setAutoDesiredState(-motorSpeed);
+    }
+
+    public void autoBalance(double balanceSpeed){
+        this.leftMotor1.setAutoDesiredState(balanceSpeed);
+        this.leftMotor2.setAutoDesiredState(balanceSpeed);
+        this.rightMotor1.setAutoDesiredState(balanceSpeed);
+        this.rightMotor2.setAutoDesiredState(balanceSpeed);
     }
 
     public void stopModules() {
