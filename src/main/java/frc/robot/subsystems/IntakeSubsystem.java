@@ -2,34 +2,31 @@ package frc.robot.subsystems;
 
 import frc.robot.MotorIds;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.CANSparkMax.IdleMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase{
-    private CANSparkMax intakeMotor;
+    private TalonFX intakeMotor;
     private double intakeSpeed;
 
     public IntakeSubsystem() {
-        intakeMotor = new CANSparkMax(MotorIds.Intake.Motor1, MotorType.kBrushless);
-
-        intakeMotor.setSmartCurrentLimit(30);
-
+        intakeMotor = new TalonFX(MotorIds.Intake.Motor1);
         intakeMotor.setInverted(false);
 
         // kBrake & kCoast
-        intakeMotor.setIdleMode(IdleMode.kBrake);
+        intakeMotor.setNeutralMode(NeutralMode.Brake);
     }
 
     public void setDesiredState(double intakeSpeed) {
-        this.intakeMotor.set(intakeSpeed);
+        this.intakeMotor.set(ControlMode.PercentOutput, intakeSpeed);
         SmartDashboard.putNumber("Intake-Speed: ", this.intakeSpeed);
     }
 
     public void stopModules() {
-        intakeMotor.set(0);
+        intakeMotor.set(ControlMode.PercentOutput, 0);
     }
 }

@@ -8,13 +8,9 @@ public class MotorIds {
         public static final int RightMotor2 = 4;
     }
 
-    public static class Elevator {
-        public static final int Motor1 = 3;
-        public static final int Motor2 = 4;
-    }
-
     public static class Arm {
         public static final int Motor1 = 2;
+        public static final int Motor2 = 3;
     }
 
     public static class Intake {
