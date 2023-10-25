@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -20,7 +21,8 @@ public class ArmCmd extends CommandBase {
 
 	@Override
 	public void execute() {
-		this.armSubsystem.setDesiredState(controller.getLeftY() * Constants.Arm.ARM_SPEED);
+		double armSpeed = MathUtil.applyDeadband(this.controller.getLeftY(), Constants.DEAD_BAND);
+		this.armSubsystem.setDesiredState(armSpeed * Constants.Arm.ARM_SPEED);
 	}
 
 	@Override

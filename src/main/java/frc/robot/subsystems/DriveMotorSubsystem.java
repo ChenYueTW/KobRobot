@@ -33,24 +33,17 @@ public class DriveMotorSubsystem extends SubsystemBase {
     }
 
     public void autoDrive(double motorSpeed) {
-        this.leftMotor1.setDesiredState(motorSpeed);
-        this.leftMotor2.setDesiredState(motorSpeed);
-        this.rightMotor1.setDesiredState(motorSpeed);
-        this.rightMotor2.setDesiredState(motorSpeed);
-    }
-
-    public void autoTrunLeftDrive(double motorSpeed){
-        this.leftMotor1.setAutoDesiredState(-motorSpeed);
-        this.leftMotor2.setAutoDesiredState(-motorSpeed);
+        this.leftMotor1.setAutoDesiredState(motorSpeed);
+        this.leftMotor2.setAutoDesiredState(motorSpeed);
         this.rightMotor1.setAutoDesiredState(motorSpeed);
         this.rightMotor2.setAutoDesiredState(motorSpeed);
     }
 
-    public void autoTurnRightDrive(double motorSpeed) {
-        this.leftMotor1.setAutoDesiredState(motorSpeed);
-        this.leftMotor2.setAutoDesiredState(motorSpeed);
-        this.rightMotor1.setAutoDesiredState(-motorSpeed);
-        this.rightMotor2.setAutoDesiredState(-motorSpeed);
+    public void autoTurnDrive(double leftSpeed, double rightSpeed) {
+        this.leftMotor1.setAutoDesiredState(leftSpeed);
+        this.leftMotor2.setAutoDesiredState(leftSpeed);
+        this.rightMotor1.setAutoDesiredState(rightSpeed);
+        this.rightMotor2.setAutoDesiredState(rightSpeed);
     }
 
     public void autoBalance(double balanceSpeed){

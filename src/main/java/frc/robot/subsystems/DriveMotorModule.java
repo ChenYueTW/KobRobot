@@ -16,7 +16,6 @@ public class DriveMotorModule {
 
         this.motor.setInverted(inverted);
 
-        // Brake & Coast
         this.motor.setNeutralMode(NeutralMode.Brake);
     }
 
@@ -31,7 +30,7 @@ public class DriveMotorModule {
     public void setAutoDesiredState(double autoDriveSpeed){
         this.motor.set(ControlMode.PercentOutput, autoDriveSpeed);
 
-        SmartDashboard.putNumber("Auto-Speed: ", autoDriveSpeed);
+        SmartDashboard.putNumber("AutoSpeed: ", autoDriveSpeed);
     }
 
     public void stop() {

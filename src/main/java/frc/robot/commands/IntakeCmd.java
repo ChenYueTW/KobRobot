@@ -20,8 +20,11 @@ public class IntakeCmd extends CommandBase {
 
 	@Override
 	public void execute() {
-		this.intakeSubsystem.setDesiredState(Constants.Arm.INTAKE_SPEED * (controller.getBButton() ? -1 : 0));
-		this.intakeSubsystem.setDesiredState(Constants.Arm.INTAKE_SPEED * (controller.getXButton() ? 1 : 0));
+		if(this.controller.getXButton()){
+			this.intakeSubsystem.setDesiredState(Constants.Arm.INTAKE_SPEED);
+		} else if(this.controller.getBButton()){
+			this.intakeSubsystem.setDesiredState(-Constants.Arm.INTAKE_SPEED);
+		}
 	}
 
 	@Override

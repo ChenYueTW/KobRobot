@@ -23,7 +23,6 @@ public class ArmSubsystem extends SubsystemBase{
         this.armMotor1.setInverted(false);
         this.armMotor2.setInverted(false);
 
-        // kBrake & kCoast
         this.armMotor1.setIdleMode(IdleMode.kBrake);
         this.armMotor2.setIdleMode(IdleMode.kBrake);
     }
@@ -31,7 +30,7 @@ public class ArmSubsystem extends SubsystemBase{
     public void setDesiredState(double armSpeed) {
         this.armMotor1.set(armSpeed);
         this.armMotor2.set(armSpeed);
-        SmartDashboard.putNumber("Arm-Speed: ", armSpeed);
+        SmartDashboard.putNumber("ArmSpeed: ", armSpeed);
     }
 
     public void stopModules() {

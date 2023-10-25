@@ -14,11 +14,10 @@ public class IntakeSubsystem extends SubsystemBase{
     private double intakeSpeed;
 
     public IntakeSubsystem() {
-        intakeMotor = new TalonFX(MotorIds.Intake.Motor1);
-        intakeMotor.setInverted(false);
+        this.intakeMotor = new TalonFX(MotorIds.Intake.Motor1);
+        this.intakeMotor.setInverted(false);
 
-        // kBrake & kCoast
-        intakeMotor.setNeutralMode(NeutralMode.Brake);
+        this.intakeMotor.setNeutralMode(NeutralMode.Brake);
     }
 
     public void setDesiredState(double intakeSpeed) {
@@ -27,6 +26,6 @@ public class IntakeSubsystem extends SubsystemBase{
     }
 
     public void stopModules() {
-        intakeMotor.set(ControlMode.PercentOutput, 0);
+        this.intakeMotor.set(ControlMode.PercentOutput, 0);
     }
 }
