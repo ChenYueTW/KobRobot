@@ -5,11 +5,17 @@ import frc.robot.subsystems.DriveMotorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class AutoMethod {
-    private final DriveMotorSubsystem driveMotorSubsystem = new DriveMotorSubsystem();
-    private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    private final ArmSubsystem armSubsystem = new ArmSubsystem();
+    private final DriveMotorSubsystem driveMotorSubsystem;
+    private final IntakeSubsystem intakeSubsystem;
+    private final ArmSubsystem armSubsystem;
     private final double driveSpeed = Constants.Auto.DRIVE_SPEED;
     private final double turnSpeed = Constants.Auto.TURN_SPEED;
+
+    public AutoMethod(DriveMotorSubsystem driveMotorSubsystem, IntakeSubsystem intakeSubsystem, ArmSubsystem armSubsystem) {
+        this.driveMotorSubsystem = driveMotorSubsystem;
+        this.intakeSubsystem = intakeSubsystem;
+        this.armSubsystem = armSubsystem;
+    }
     
     public void forwardDrive(){
         this.driveMotorSubsystem.autoDrive(Constants.Auto.DRIVE_SPEED);
@@ -51,19 +57,35 @@ public class AutoMethod {
         this.driveMotorSubsystem.autoTurnDrive(this.driveSpeed, -this.driveSpeed);
     }
 
-    public void pullSystem(){
-        this.intakeSubsystem.setDesiredState(Constants.Auto.INTAKE_SPEED);
-    }
-
-    public void pushSystem(){
+    public void intakePullCube(){
         this.intakeSubsystem.setDesiredState(-Constants.Auto.INTAKE_SPEED);
     }
 
-    public void armUp(){
-        this.armSubsystem.setDesiredState(Constants.Auto.ARM_SPEED);
+    public void intakePushCube(){
+        this.intakeSubsystem.setDesiredState(Constants.Auto.INTAKE_SPEED);
     }
 
-    public void armDown(){
-        this.armSubsystem.setDesiredState(-Constants.Auto.ARM_SPEED);
+    public void intakePullCone() {
+        this.intakeSubsystem.setDesiredState(Constants.Auto.INTAKE_SPEED);
+    }
+
+    public void intakePushCone() {
+        this.intakeSubsystem.setDesiredState(-Constants.Auto.INTAKE_SPEED);
+    }
+
+    public void armForwardUP(){
+        this.armSubsystem.setDesiredStateForward(Constants.Auto.ARM_FORWARD_SPEED);
+    }
+
+    public void armForwardDown(){
+        this.armSubsystem.setDesiredStateForward(-Constants.Auto.ARM_FORWARD_SPEED);
+    }
+
+    public void armBackwardUP() {
+        this.armSubsystem.setDesiredStateBackward(Constants.Auto.ARM_BACKWARD_SPEED);
+    }
+
+    public void armBackwardDown() {
+        this.armSubsystem.setDesiredStateBackward(-Constants.Auto.ARM_BACKWARD_SPEED);
     }
 }

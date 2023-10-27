@@ -23,9 +23,10 @@ public class DriveJoystickCmd extends CommandBase {
 	public void execute() {
 		double moveSpeed = -MathUtil.applyDeadband(this.controller.getLeftY(), Constants.DEAD_BAND);
 		double turnSpeed = MathUtil.applyDeadband(this.controller.getRightX(), Constants.DEAD_BAND);
+		double brakes = 1 - MathUtil.applyDeadband(this.controller.getLeftTriggerAxis(), Constants.DEAD_BAND);
 
-		double leftSpeed = moveSpeed + turnSpeed;
-		double rightSpeed = moveSpeed - turnSpeed;
+		double leftSpeed = (moveSpeed + turnSpeed) * brakes;
+		double rightSpeed = (moveSpeed - turnSpeed) * brakes;
 		this.driveSubsystem.driverMove(leftSpeed, rightSpeed);
 	}
 

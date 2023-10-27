@@ -21,13 +21,18 @@ public class ArmCmd extends CommandBase {
 
 	@Override
 	public void execute() {
-		double armSpeed = MathUtil.applyDeadband(this.controller.getLeftY(), Constants.DEAD_BAND);
-		this.armSubsystem.setDesiredState(armSpeed * Constants.Arm.ARM_SPEED);
+		double armSpeedForward = MathUtil.applyDeadband(this.controller.getLeftY(), Constants.DEAD_BAND);
+		double armSpeedBackward = MathUtil.applyDeadband(this.controller.getRightY(), Constants.DEAD_BAND);
+		double brakesForward = 1 - MathUtil.applyDeadband(this.controller.getLeftTriggerAxis(), Constants.DEAD_BAND);
+		double brakesBackward = 1 - MathUtil.applyDeadband(this.controller.getRightTriggerAxis(), Constants.DEAD_BAND);
+
+		this.armSubsystem.setDesiredStateForward(armSpeedForward * brakesForward * Constants.Control.ARM_FORWARD_SPEED);
+		this.armSubsystem.setDesiredStateBackward(armSpeedBackward * brakesBackward * Constants.Control.ARM_BACKWARD_SPEED);
 	}
 
 	@Override
 	public void end(boolean interrupted) {
-		this.armSubsystem.stopModules();
+		this.armSubsystem.stopForwardModule();
 	}
 
 	@Override

@@ -21,9 +21,15 @@ public class IntakeCmd extends CommandBase {
 	@Override
 	public void execute() {
 		if(this.controller.getXButton()){
-			this.intakeSubsystem.setDesiredState(Constants.Arm.INTAKE_SPEED);
-		} else if(this.controller.getBButton()){
-			this.intakeSubsystem.setDesiredState(-Constants.Arm.INTAKE_SPEED);
+			this.intakeSubsystem.setDesiredState(Constants.Control.INTAKE_SPEED);
+		} else if(this.controller.getBButton()) {
+			this.intakeSubsystem.setDesiredState(-Constants.Control.INTAKE_SPEED);
+		} else if(this.controller.getLeftBumper()) {
+			this.intakeSubsystem.setDesiredState(-Constants.Control.INTAKE_SPEED);
+		} else if(this.controller.getRightBumper()) {
+			this.intakeSubsystem.setDesiredState(Constants.Control.INTAKE_SPEED);
+		} else {
+			this.intakeSubsystem.stopModules();
 		}
 	}
 

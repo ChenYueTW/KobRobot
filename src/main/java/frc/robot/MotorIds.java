@@ -14,6 +14,6 @@ public class MotorIds {
     }
 
     public static class Intake {
-        public static final int Motor1 = 1;
+        public static final int Motor1 = 5;
     }
 }

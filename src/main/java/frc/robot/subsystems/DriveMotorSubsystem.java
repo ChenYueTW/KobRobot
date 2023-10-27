@@ -4,21 +4,22 @@ import frc.robot.MotorIds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SerialPort;
+
+import edu.wpi.first.wpilibj.SPI;
 
 public class DriveMotorSubsystem extends SubsystemBase { 
     private final DriveMotorModule leftMotor1;
     private final DriveMotorModule leftMotor2;
     private final DriveMotorModule rightMotor1;
     private final DriveMotorModule rightMotor2;
-    private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
+    private final AHRS gyro = new AHRS(SPI.Port.kMXP);
     
     public DriveMotorSubsystem() {
         this.leftMotor1 = new DriveMotorModule(MotorIds.PWM.LeftMotor1, false);
         this.leftMotor2 = new DriveMotorModule(MotorIds.PWM.LeftMotor2, false);
         this.rightMotor1 = new DriveMotorModule(MotorIds.PWM.RightMotor1, true);
         this.rightMotor2 = new DriveMotorModule(MotorIds.PWM.RightMotor2, true);
-        // gyro.reset();
+        gyro.reset();
     }
 
     public double getPitch(){
