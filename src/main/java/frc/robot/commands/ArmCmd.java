@@ -31,9 +31,9 @@ public class ArmCmd extends CommandBase {
 
 		this.armForwardSubsystem.setDesiredStateForward(armSpeedForward * brakesForward * Constants.Control.ARM_FORWARD_SPEED);
 		this.armBackwardSubsystem.setDesiredStateBackward(armSpeedBackward * brakesBackward * Constants.Control.ARM_BACKWARD_SPEED);
-		if(this.controller.getYButton()) {
-			this.armBackwardSubsystem.resetEncoder();
-		}
+		// if(this.controller.getYButton()) {
+		// 	this.armBackwardSubsystem.resetEncoder();
+		// }
 	}
 
 	@Override

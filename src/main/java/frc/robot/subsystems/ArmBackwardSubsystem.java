@@ -23,15 +23,15 @@ public class ArmBackwardSubsystem extends SubsystemBase{
     }
 
     public void resetEncoder() {
-        this.backwardEncoder.setPosition(0);
+        this.backwardEncoder.setPosition(0.0);
     }
 
     public void setDesiredStateBackward(double backwardSpeed) {
         double position = this.backwardEncoder.getPosition();
-        if (position <= -58 && backwardSpeed < 0) {
+        if (position <= 0.5 && backwardSpeed < 0) {
             this.backwardMotor.set(0);
 
-        } else if (position >= -5 && backwardSpeed > 0) {
+        } else if (position >= 60 && backwardSpeed > 0) {
             this.backwardMotor.set(0);
 
         } else {
