@@ -4,16 +4,19 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.ArmBackwardSubsystem;
+import frc.robot.subsystems.ArmForwardSubsystem;
 
 public class ArmCmd extends CommandBase {
-	private final ArmSubsystem armSubsystem;
+	private final ArmForwardSubsystem armForwardSubsystem;
+	private final ArmBackwardSubsystem armBackwardSubsystem;
 	private final XboxController controller;
 
-	public ArmCmd(ArmSubsystem subsystem, XboxController controller) {
-		this.armSubsystem = subsystem;
+	public ArmCmd(ArmForwardSubsystem forwardSubsystem, ArmBackwardSubsystem backwardSubsystem, XboxController controller) {
+		this.armForwardSubsystem = forwardSubsystem;
+		this.armBackwardSubsystem = backwardSubsystem;
 		this.controller = controller;
-		addRequirements(this.armSubsystem);
+		addRequirements(this.armForwardSubsystem, this.armBackwardSubsystem);
 	}
 
 	@Override
@@ -26,13 +29,17 @@ public class ArmCmd extends CommandBase {
 		double brakesForward = 1 - MathUtil.applyDeadband(this.controller.getLeftTriggerAxis(), Constants.DEAD_BAND);
 		double brakesBackward = 1 - MathUtil.applyDeadband(this.controller.getRightTriggerAxis(), Constants.DEAD_BAND);
 
-		this.armSubsystem.setDesiredStateForward(armSpeedForward * brakesForward * Constants.Control.ARM_FORWARD_SPEED);
-		this.armSubsystem.setDesiredStateBackward(armSpeedBackward * brakesBackward * Constants.Control.ARM_BACKWARD_SPEED);
+		this.armForwardSubsystem.setDesiredStateForward(armSpeedForward * brakesForward * Constants.Control.ARM_FORWARD_SPEED);
+		this.armBackwardSubsystem.setDesiredStateBackward(armSpeedBackward * brakesBackward * Constants.Control.ARM_BACKWARD_SPEED);
+		if(this.controller.getYButton()) {
+			this.armBackwardSubsystem.resetEncoder();
+		}
 	}
 
 	@Override
 	public void end(boolean interrupted) {
-		this.armSubsystem.stopForwardModule();
+		this.armForwardSubsystem.stopModules();
+		this.armBackwardSubsystem.stopModules();
 	}
 
 	@Override

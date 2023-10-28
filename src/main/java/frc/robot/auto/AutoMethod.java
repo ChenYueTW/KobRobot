@@ -1,20 +1,24 @@
-package frc.robot;
+package frc.robot.auto;
 
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.Constants;
+import frc.robot.subsystems.ArmBackwardSubsystem;
+import frc.robot.subsystems.ArmForwardSubsystem;
 import frc.robot.subsystems.DriveMotorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class AutoMethod {
     private final DriveMotorSubsystem driveMotorSubsystem;
     private final IntakeSubsystem intakeSubsystem;
-    private final ArmSubsystem armSubsystem;
+    private final ArmForwardSubsystem armForwardSubsystem;
+    private final ArmBackwardSubsystem armBackwardSubsystem;
     private final double driveSpeed = Constants.Auto.DRIVE_SPEED;
     private final double turnSpeed = Constants.Auto.TURN_SPEED;
 
-    public AutoMethod(DriveMotorSubsystem driveMotorSubsystem, IntakeSubsystem intakeSubsystem, ArmSubsystem armSubsystem) {
+    public AutoMethod(DriveMotorSubsystem driveMotorSubsystem, IntakeSubsystem intakeSubsystem, ArmForwardSubsystem armForwardSubsystem, ArmBackwardSubsystem armBackwardSubsystem) {
         this.driveMotorSubsystem = driveMotorSubsystem;
         this.intakeSubsystem = intakeSubsystem;
-        this.armSubsystem = armSubsystem;
+        this.armForwardSubsystem = armForwardSubsystem;
+        this.armBackwardSubsystem = armBackwardSubsystem;
     }
     
     public void forwardDrive(){
@@ -74,18 +78,18 @@ public class AutoMethod {
     }
 
     public void armForwardUP(){
-        this.armSubsystem.setDesiredStateForward(Constants.Auto.ARM_FORWARD_SPEED);
+        this.armForwardSubsystem.setDesiredStateForward(-Constants.Auto.ARM_FORWARD_SPEED);
     }
 
     public void armForwardDown(){
-        this.armSubsystem.setDesiredStateForward(-Constants.Auto.ARM_FORWARD_SPEED);
+        this.armForwardSubsystem.setDesiredStateForward(Constants.Auto.ARM_FORWARD_SPEED);
     }
 
     public void armBackwardUP() {
-        this.armSubsystem.setDesiredStateBackward(Constants.Auto.ARM_BACKWARD_SPEED);
+        this.armBackwardSubsystem.setDesiredStateBackward(-Constants.Auto.ARM_BACKWARD_SPEED);
     }
 
     public void armBackwardDown() {
-        this.armSubsystem.setDesiredStateBackward(-Constants.Auto.ARM_BACKWARD_SPEED);
+        this.armBackwardSubsystem.setDesiredStateBackward(Constants.Auto.ARM_BACKWARD_SPEED);
     }
 }
